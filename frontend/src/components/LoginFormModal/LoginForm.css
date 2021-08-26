@@ -1,0 +1,43 @@
+.logIn_form{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+/* .logIn_form */
+
+#modal  h1 {
+    text-align: center;
+    margin-top: 10px;
+}
+
+#modal input {
+    width: 60%;
+    margin-left: 20%;
+    margin-bottom: 20px;
+}
+
+#modal label {
+    margin-left: 20%;
+}
+
+.login_errors{
+    height: 20px;
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+.form_button:hover{
+    background-color: #2e5788;
+    color: white
+}
+
+.form_button{
+    background-color: #253c58;
+    color: lightblue;
+    padding: 10px;
+    border: none;
+    border-radius: 2px;
+    margin-right: 15px;
+}
