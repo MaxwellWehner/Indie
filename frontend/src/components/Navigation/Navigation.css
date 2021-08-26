@@ -1,3 +1,63 @@
 .profile-dropdown {
   position: absolute;
+  right: 30px;
+  top: 70px
+}
+
+.nav_bar{
+    background-color: #171a21;
+    height: 100px;
+    color: white;
+    display: flex;
+    align-items: center;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 30px;
+    flex-direction: row;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+.nav_bar > a {
+    font-size: 30px;
+    font-family: 'Open Sans', sans-serif;
+    width: 9%;
+    margin: 0;
+    padding-left: 30px;
+}
+
+.login_button{
+    margin: 0 auto;
+    cursor: pointer;
+}
+
+.user_access{
+    display: flex;
+    /* margin-left: auto; */
+    /* margin: */
+    /* justify-content: flex-end;
+    width: 100% */
+    position: fixed;
+    right: 30px;
+    width: 300px;
+}
+
+/* .user_access > * {
+    width: 100%;
+} */
+
+.user_info_button{
+    position: fixed;
+    right: 30px;
+    cursor: pointer;
+}
+
+.log_out_button{
+    font-size: 20px;
+    cursor: pointer;
+}
+.log_out_button:hover{
+    font-weight: 600;
 }
