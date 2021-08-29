@@ -11,7 +11,8 @@ function SignupFormPagePublisher() {
 	const [email, setEmail] = useState("");
 	const [username, setUsername] = useState("");
 	const [password, setPassword] = useState("");
-	const [confirmPassword, setConfirmPassword] = useState("");
+    const [confirmPassword, setConfirmPassword] = useState("");
+	const [publisherName, setPublisherName] = useState("");
 	const [errors, setErrors] = useState([]);
 	const userType = "Publisher";
 
@@ -22,7 +23,13 @@ function SignupFormPagePublisher() {
 		if (password === confirmPassword) {
 			setErrors([]);
 			return dispatch(
-				sessionActions.signup({ email, username, password, userType })
+				sessionActions.signupPublisher({
+					email,
+					username,
+					password,
+					userType,
+					publisherName,
+				})
 			).catch(async (res) => {
 				const data = await res.json();
 				if (data && data.errors) setErrors(data.errors);
@@ -36,13 +43,13 @@ function SignupFormPagePublisher() {
 	return (
 		<>
 			<form onSubmit={handleSubmit} className="signUp_form">
-				<h1>Sign Up</h1>
+				<h1>Publisher Sign Up</h1>
 				<ul>
 					{errors.map((error, idx) => (
 						<li key={idx}>{error}</li>
 					))}
 				</ul>
-				<Link to="/signup-publisher">Are You A Publisher?</Link>
+				<Link to="/signup">Are You A Shopper?</Link>
 				<label>Email</label>
 				<input
 					type="text"
@@ -50,11 +57,18 @@ function SignupFormPagePublisher() {
 					onChange={(e) => setEmail(e.target.value)}
 					required
 				/>
-				<label>Username</label>
+				<label>Login Name</label>
 				<input
 					type="text"
 					value={username}
 					onChange={(e) => setUsername(e.target.value)}
+					required
+				/>
+				<label>Publisher Name</label>
+				<input
+					type="text"
+					value={publisherName}
+					onChange={(e) => setPublisherName(e.target.value)}
 					required
 				/>
 				<label>Password</label>
@@ -71,6 +85,7 @@ function SignupFormPagePublisher() {
 					onChange={(e) => setConfirmPassword(e.target.value)}
 					required
 				/>
+
 				<button type="submit" className="form_button">
 					Sign Up
 				</button>

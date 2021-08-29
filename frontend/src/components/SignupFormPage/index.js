@@ -13,7 +13,7 @@ function SignupFormPage() {
 	const [password, setPassword] = useState("");
 	const [confirmPassword, setConfirmPassword] = useState("");
 	const [errors, setErrors] = useState([]);
-	const userType = "Shopper";
+    const userType = "Shopper";
 
 	if (sessionUser) return <Redirect to="/" />;
 
@@ -22,7 +22,12 @@ function SignupFormPage() {
 		if (password === confirmPassword) {
 			setErrors([]);
 			return dispatch(
-				sessionActions.signup({ email, username, password, userType })
+				sessionActions.signupShopper({
+					email,
+					username,
+					password,
+					userType,
+				})
 			).catch(async (res) => {
 				const data = await res.json();
 				if (data && data.errors) setErrors(data.errors);
@@ -36,7 +41,7 @@ function SignupFormPage() {
 	return (
 		<>
 			<form onSubmit={handleSubmit} className="signUp_form">
-				<h1>Sign Up</h1>
+				<h1>Shopper Sign Up</h1>
 				<ul>
 					{errors.map((error, idx) => (
 						<li key={idx}>{error}</li>

@@ -40,6 +40,7 @@ module.exports = (sequelize, DataTypes) => {
 		}
 		static associate(models) {
 			User.hasOne(models.Shopper, { foreignKey: "userId" });
+			User.hasOne(models.Publisher, { foreignKey: "userId" });
 		}
 	}
 	User.init(

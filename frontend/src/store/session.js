@@ -29,9 +29,9 @@ export const restoreUser = () => async dispatch => {
   return response;
 };
 
-export const signup = (user) => async (dispatch) => {
-  const { username, email, password, userType } = user;
-  const response = await csrfFetch("/api/users", {
+export const signupShopper = (user) => async (dispatch) => {
+	const { username, email, password, userType } = user;
+	const response = await csrfFetch("/api/users", {
 		method: "POST",
 		body: JSON.stringify({
 			username,
@@ -39,10 +39,27 @@ export const signup = (user) => async (dispatch) => {
 			password,
 			userType,
 		}),
-  });
-  const data = await response.json();
-  dispatch(setUser(data.user));
-  return response;
+	});
+	const data = await response.json();
+	dispatch(setUser(data.user));
+	return response;
+};
+
+export const signupPublisher = (user) => async (dispatch) => {
+	const { username, email, password, userType, publisherName } = user;
+	const response = await csrfFetch("/api/users/publisher", {
+		method: "POST",
+		body: JSON.stringify({
+			username,
+			email,
+			password,
+			userType,
+			publisherName,
+		}),
+	});
+	const data = await response.json();
+	dispatch(setUser(data.user));
+	return response;
 };
 
 export const logout = () => async (dispatch) => {
