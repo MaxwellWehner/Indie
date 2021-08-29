@@ -20,12 +20,26 @@ function LoginForm() {
     );
   };
 
-    const handleDemo = (e) => {
+    const handleShopperDemo = (e) => {
 		e.preventDefault();
 		setErrors([]);
 		return dispatch(
 			sessionActions.login({
 				credential: "demo@user.io",
+				password: "password",
+			})
+		).catch(async (res) => {
+			const data = await res.json();
+			if (data && data.errors) setErrors(data.errors);
+		});
+	};
+
+	const handlePublisherDemo = (e) => {
+		e.preventDefault();
+		setErrors([]);
+		return dispatch(
+			sessionActions.login({
+				credential: "demo@publisher.io",
 				password: "password",
 			})
 		).catch(async (res) => {
@@ -61,8 +75,14 @@ function LoginForm() {
 					<button type="submit" className="form_button">
 						Log In
 					</button>
-					<button onClick={handleDemo} className="form_button">
-						Demo Login
+					<button onClick={handleShopperDemo} className="form_button">
+						Demo Shopper Login
+					</button>
+					<button
+						onClick={handlePublisherDemo}
+						className="form_button"
+					>
+						Demo Publisher Login
 					</button>
 				</div>
 			</form>

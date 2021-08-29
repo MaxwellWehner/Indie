@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import * as sessionActions from "../../store/session";
 import "./SignupForm.css";
 
-function SignupFormPage() {
+function SignupFormPagePublisher() {
 	const dispatch = useDispatch();
 	const sessionUser = useSelector((state) => state.session.user);
 	const [email, setEmail] = useState("");
@@ -13,7 +13,7 @@ function SignupFormPage() {
 	const [password, setPassword] = useState("");
 	const [confirmPassword, setConfirmPassword] = useState("");
 	const [errors, setErrors] = useState([]);
-	const userType = "Shopper";
+	const userType = "Publisher";
 
 	if (sessionUser) return <Redirect to="/" />;
 
@@ -79,4 +79,4 @@ function SignupFormPage() {
 	);
 }
 
-export default SignupFormPage;
+export default SignupFormPagePublisher;
