@@ -1,10 +1,17 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { NavLink } from "react-router-dom";
 import { useSelector } from "react-redux";
 import "./Home.css";
+import { csrfFetch } from "../../store/csrf";
 
 function Home({ games }) {
 	const sessionUser = useSelector((state) => state.session.user);
+
+	useEffect(() => {
+		(async () => {
+			await csrfFetch("/api/games/test");
+		})();
+	}, [sessionUser]);
 
 	return (
 		<div>
