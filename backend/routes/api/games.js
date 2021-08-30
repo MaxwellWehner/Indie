@@ -94,13 +94,15 @@ router.post(
 	requireAuth,
 	asyncHandler(async (req, res) => {
 		const userId = req.user.id;
-		const publisher = Publisher.findOne({
-			where: {
-				userId,
-			},
-		});
+
 		const { price, releaseDate, title, description, developer } = req.body;
 		if (req.user.userType === "Publisher") {
+			const publisher = Publisher.findOne({
+				where: {
+					userId,
+				},
+			});
+
 			const newGame = await Game.create({
 				price,
 				releaseDate,
@@ -117,6 +119,73 @@ router.post(
 		}
 	})
 );
+
+router.put(
+	"/:id(\\d+)",
+	requireAuth,
+	asyncHandler(async (req, res) => {
+		const userId = req.user.id;
+		const { id } = req.params;
+		const game = Game.findByPk(id);
+		if (req.user.userType === "Publisher") {
+			const publisher = Publisher.findOne({
+				where: {
+					userId,
+				},
+			});
+			const { price, releaseDate, title, description, developer } =
+				req.body;
+			if (game.publisherId === publisher.id) {
+				const newGame = await game.update({
+					price,
+					releaseDate,
+					title,
+					description,
+					developer,
+					// publisherId: publisher.Id,
+				});
+				return res.json({ game: newGame });
+			} else {
+				return res.json({
+					errors: ["You must be publisher of this game to edit it"],
+				});
+			}
+		} else {
+			return res.json({
+				errors: ["You must be publisher to edit a game"],
+			});
+		}
+	})
+);
+
+router.delete(
+	"/:id(\\d+)",
+	asyncHandler(async (req, res) => {
+		const userId = req.user.id;
+		const { id } = req.params;
+		const game = Game.findByPk(id);
+		if (req.user.userType === "Publisher") {
+			const publisher = Publisher.findOne({
+				where: {
+					userId,
+				},
+			});
+			if (game.publisherId === publisher.id) {
+				game.destroy();
+				return {}; //game deleted succsess
+			} else {
+				return res.json({
+					errors: ["You must be publisher of this game to delete it"],
+				});
+			}
+		} else {
+			return res.json({
+				errors: ["You must be publisher to delete a game"],
+			});
+		}
+	})
+);
+
 
 // Sign up
 router.post(
