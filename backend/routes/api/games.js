@@ -242,19 +242,21 @@ router.put(
 
 router.delete(
 	"/:id(\\d+)",
+	requireAuth,
 	asyncHandler(async (req, res) => {
 		const userId = req.user.id;
-		const { id } = req.params;
-		const game = Game.findByPk(id);
+		const id = req.params.id;
+		console.log(id, "==================================================");
+		const game = await Game.findByPk(id);
 		if (req.user.userType === "Publisher") {
-			const publisher = Publisher.findOne({
+			const publisher = await Publisher.findOne({
 				where: {
 					userId,
 				},
 			});
 			if (game.publisherId === publisher.id) {
-				game.destroy();
-				return {}; //game deleted succsess
+				await game.destroy();
+				return res.json({ message: "success" }); //game deleted succsess
 			} else {
 				return res.json({
 					errors: ["You must be publisher of this game to delete it"],

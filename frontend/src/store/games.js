@@ -2,7 +2,7 @@ import { csrfFetch } from "./csrf.js";
 
 const ADD_GAME = "games/ADD_GAME";
 const ADD_GAMES = "games/ADD_GAMES";
-// const REMOVE_GAME = "games/REMOVE_GAME";
+const REMOVE_GAME = "games/REMOVE_GAME";
 
 const addGames = (games) => ({
 	type: ADD_GAMES,
@@ -14,10 +14,10 @@ const addGame = (game) => ({
 	game,
 });
 
-// const removeGame = (id) => ({
-// 	type: REMOVE_GAME,
-// 	id,
-// });
+const removeGame = (id) => ({
+	type: REMOVE_GAME,
+	id,
+});
 
 // export const fiveRandomGames = () => async (dispatch) => {
 // 	const response = await csrfFetch("/api/games/random");
@@ -35,6 +35,16 @@ export const getPublishersGameIds = (userId) => async () => {
 	// data.game.Publisher = data.game.Publisher.publisherName; //changes publisher name to be direct
 
 	return gameIds;
+};
+
+export const removeGameThunk = (gameId) => async (dispatch) => {
+	const response = await csrfFetch(`/api/games/${gameId}`, {
+		method: "DELETE",
+	});
+	// const data = await response.json();
+	console.log(gameId, "((((((((((((((((((((((((((((((((((((");
+	dispatch(removeGame(gameId));
+	// return data;
 };
 
 export const addOneGame = (id) => async (dispatch) => {
@@ -88,7 +98,7 @@ export const createGameThunk =
 		data.game.Publisher = data.game.Publisher.publisherName; //changes publisher name to be direct
 		dispatch(addGame(data.game));
 		return response;
-	};;
+	};
 
 export const getGamesByIdArr = (Ids) => async (dispatch) => {
 	const response = await csrfFetch("/api/games/array", {
@@ -126,9 +136,11 @@ function reducer(state = initialState, action) {
 			const newAddSateGames = { ...state };
 			newAddSateGames[action.game.id] = action.game;
 			return newAddSateGames;
-		// case REMOVE_USER:
-		// 	newState = Object.assign({}, state, { user: null });
-		// 	return newState;
+		case REMOVE_GAME:
+			console.log("in reducer");
+			const removeState = { ...state };
+			delete removeState[action.id];
+			return removeState;
 		default:
 			return state;
 	}

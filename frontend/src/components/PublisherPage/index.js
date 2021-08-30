@@ -1,7 +1,11 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Redirect, useHistory } from "react-router-dom";
-import { getGamesByIdArr, getPublishersGameIds } from "../../store/games";
+import {
+	getGamesByIdArr,
+	getPublishersGameIds,
+	removeGameThunk,
+} from "../../store/games";
 import { addImagesFromArr } from "../../store/images";
 import "./PublisherPage.css";
 
@@ -39,6 +43,15 @@ const PublisherPage = () => {
 		}
 	}, [gameIds, games]);
 
+	const handleDelete = (gameId) => {
+		(async () => {
+			dispatch(removeGameThunk(gameId));
+			const ids = await dispatch(getPublishersGameIds(user.id));
+			setGameIds(ids);
+			await dispatch(getGamesByIdArr(ids));
+		})();
+	};
+
 	if (!user) {
 		return <Redirect to="/" />;
 	}
@@ -63,6 +76,7 @@ const PublisherPage = () => {
 						<div
 							className="pub_card_buttons"
 							id="pub_delete_button"
+							onClick={() => handleDelete(gameId)}
 						>
 							Delete Game
 						</div>
