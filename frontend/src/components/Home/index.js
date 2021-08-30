@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from "react";
-import { NavLink } from "react-router-dom";
+// import { NavLink } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import "./Home.css";
-import { fiveRandomGames, tenRecentGames } from "../../store/games";
+import { tenRecentGames } from "../../store/games";
 import GameCarousel from "../GameCarousel";
 
 function Home() {
-	const sessionUser = useSelector((state) => state.session.user);
+	// const sessionUser = useSelector((state) => state.session.user);
 	const games = useSelector((state) => state.games);
-	const [randomGames, setRandomGames] = useState([]);
+	// const [randomGames, setRandomGames] = useState([]);
 	const dispatch = useDispatch();
 
 	useEffect(() => {
@@ -16,25 +16,25 @@ function Home() {
 		dispatch(tenRecentGames());
 	}, [dispatch]);
 
-	useEffect(() => {
-		if (games) {
-			let rnd = new Set();
-			while (rnd.size < 5) {
-				rnd.add(
-					Object.keys(games)[
-						Math.floor(Math.random() * Object.keys(games).length)
-					]
-				);
-			}
-			setRandomGames(Array.from(rnd));
-		}
-	}, [games]);
+	// useEffect(() => { //makes infinite lopp sometimes?????
+	// 	if (games) {
+	// 		let rnd = new Set();
+	// 		while (rnd.size < 5) {
+	// 			rnd.add(
+	// 				Object.keys(games)[
+	// 					Math.floor(Math.random() * Object.keys(games).length)
+	// 				]
+	// 			);
+	// 		}
+	// 		setRandomGames(Array.from(rnd));
+	// 	}
+	// }, [games]);
 
 	return (
 		<div>
 			{games && Object.keys(games).length && (
-				<GameCarousel games={randomGames} />
-			)}
+				<GameCarousel games={[1, 2, 3]} />
+            )}
 
 			{games &&
 				Object.keys(games).map((gameId) => (
@@ -42,9 +42,10 @@ function Home() {
 						<div>game: {games[gameId].title}</div>
 						<div>publisher: {games[gameId].publisherName}</div>
 						<div>release Date: {games[gameId].releaseDate}</div>
-						{/* <img src={game.images[0]} alt="game screenshot" /> */}
+
 					</div>
-				))}
+                ))
+            }
 		</div>
 	);
 }

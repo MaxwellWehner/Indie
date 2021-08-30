@@ -9,7 +9,8 @@ module.exports = (sequelize, DataTypes) => {
 		 */
 		static associate(models) {
 			Game.belongsTo(models.Publisher, { foreignKey: "publisherId" });
-		}
+            Game.hasMany(models.Image, {foreignKey: "gameId"})
+        }
 	}
 	Game.init(
 		{

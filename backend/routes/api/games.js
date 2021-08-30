@@ -188,24 +188,24 @@ router.delete(
 
 
 // Sign up
-router.post(
-	"",
-	validateSignup,
-	asyncHandler(async (req, res) => {
-		const { email, password, username, userType, publisherName } = req.body;
-		const user = await User.signup({ email, username, password, userType });
+// router.post(
+// 	"",
+// 	validateSignup,
+// 	asyncHandler(async (req, res) => {
+// 		const { email, password, username, userType, publisherName } = req.body;
+// 		const user = await User.signup({ email, username, password, userType });
 
-		if (userType === "Shopper") {
-			await Shopper.create({
-				userId: user.id,
-				wallet: 0,
-			});
-		}
+// 		if (userType === "Shopper") {
+// 			await Shopper.create({
+// 				userId: user.id,
+// 				wallet: 0,
+// 			});
+// 		}
 
-		return res.json({
-			user,
-		});
-	})
-);
+// 		return res.json({
+// 			user,
+// 		});
+// 	})
+// );
 
 module.exports = router;
