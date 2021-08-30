@@ -26,6 +26,17 @@ const addGame = (game) => ({
 // 	return response;
 // };
 
+export const getPublishersGameIds = (userId) => async () => {
+	const response = await csrfFetch(`/api/games/publisher/${userId}`);
+	const data = await response.json();
+	const gameIds = [];
+	data.publisher.Games.forEach((game) => gameIds.push(game.id));
+	//changes image to imgae ID arr
+	// data.game.Publisher = data.game.Publisher.publisherName; //changes publisher name to be direct
+
+	return gameIds;
+};
+
 export const addOneGame = (id) => async (dispatch) => {
 	const response = await csrfFetch(`/api/games/${id}`);
 	const data = await response.json();
@@ -41,6 +52,27 @@ export const addOneGame = (id) => async (dispatch) => {
 
 export const tenRecentGames = () => async (dispatch) => {
 	const response = await csrfFetch("/api/games/");
+	const data = await response.json();
+	data.games.forEach((game, gIdx) =>
+		game.Images.forEach(
+			(image, iIdx) => (data.games[gIdx]["Images"][iIdx] = image.id)
+		)
+	); //changes image to imgae ID arr
+	data.games.forEach(
+		(game, gIdx) =>
+			(data.games[gIdx].Publisher = game.Publisher.publisherName) //changes publisher name to be direct
+	);
+	dispatch(addGames(data.games));
+	return response;
+};
+
+export const getGamesByIdArr = (Ids) => async (dispatch) => {
+	const response = await csrfFetch("/api/games/array", {
+		method: "POST",
+		body: JSON.stringify({
+			array: Ids,
+		}),
+	});
 	const data = await response.json();
 	data.games.forEach((game, gIdx) =>
 		game.Images.forEach(

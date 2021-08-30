@@ -92,6 +92,30 @@ router.get(
 	})
 );
 
+//get games form userId
+router.get(
+	"/publisher/:id(\\d+)",
+	// requireAuth,
+    asyncHandler(async (req, res) => {
+        const userId = +req.params.id;
+
+        const publisher = await Publisher.findOne({
+			attributes: [],
+			where: {
+				userId,
+			},
+			include: [
+				{
+					model: Game,
+					attributes: ["id"],
+				},
+			],
+		});
+
+        return res.json({ publisher });
+    })
+);
+
 //get games from arr of Ids
 router.post(
 	"/array",
@@ -103,6 +127,16 @@ router.post(
 					[Op.in]: array,
 				},
 			},
+			include: [
+				{
+					model: Image,
+					attributes: ["id"],
+				},
+				{
+					model: Publisher,
+					attributes: ["publisherName"],
+				},
+			],
 		});
 
 		return res.json({ games });

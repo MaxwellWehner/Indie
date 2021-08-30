@@ -9,6 +9,7 @@ import Navigation from './components/Navigation';
 import Home from "./components/Home";
 import SignupFormPagePublisher from "./components/SignupFormPage/SignUpFormPubisher";
 import GamePage from "./components/GamePage";
+import PublisherPage from "./components/PublisherPage";
 
 function App() {
 	const dispatch = useDispatch();
@@ -43,6 +44,9 @@ function App() {
 					</Route>
 					<Route path="/games/:id">
 						<GamePage />
+					</Route>
+					<Route path="/publisher">
+						<PublisherPage />
 					</Route>
 				</Switch>
 			)}

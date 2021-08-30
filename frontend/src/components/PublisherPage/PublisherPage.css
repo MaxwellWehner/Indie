@@ -1,0 +1,59 @@
+.pub_card_container{
+    display: flex;
+    justify-content: flex-start;
+    width: 80%;
+    margin-top: 5%;
+}
+
+.pub_card_container *{
+    margin: 0 0
+}
+
+.pub_game_card{
+    width: 20%;
+    margin-right: 5%;
+    text-align: center;
+    background-color: #171a21;
+    height: 400px;
+    font-family: 'Duru Sans', sans-serif;
+}
+
+.pub_card_img{
+    width:80%;
+    margin-top: 10%;
+    margin-bottom: 10%;
+    cursor: pointer;
+}
+
+.pub_card_title{
+    font-size: 30px;
+    margin-bottom: 15%;
+}
+
+.create_game_pub{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.pub_card_buttons{
+    margin-bottom: 5%;
+    width: 80%;
+    margin-left: 10%;
+     background-color: #253c58;
+    color: lightblue;
+    padding: 2.5%;
+    border: none;
+    border-radius: 2px;
+    box-sizing: border-box;
+}
+
+.pub_card_buttons:hover{
+    background-color: #2e5788;
+    color: white
+}
+
+#pub_delete_button:hover{
+background-color: #ca3838;
+}

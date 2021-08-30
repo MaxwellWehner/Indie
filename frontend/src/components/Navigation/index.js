@@ -9,13 +9,22 @@ function Navigation({ isLoaded }) {
 	const sessionUser = useSelector((state) => state.session.user);
 
 	let sessionLinks;
-	if (sessionUser) {
-		sessionLinks = (
-			<>
-				<NavLink to="/library">Your Library</NavLink>
-				<ProfileButton user={sessionUser} />
-			</>
-		);
+    if (sessionUser) {
+		if (sessionUser.userType === "Publisher") {
+			sessionLinks = (
+				<>
+					<NavLink to="/publisher">Your Games</NavLink>
+					<ProfileButton user={sessionUser} />
+				</>
+			);
+		} else {
+			sessionLinks = (
+				<>
+					<NavLink to="/library">Your Library</NavLink>
+					<ProfileButton user={sessionUser} />
+				</>
+			);
+		}
 	} else {
 		sessionLinks = (
 			<div className="user_access">
