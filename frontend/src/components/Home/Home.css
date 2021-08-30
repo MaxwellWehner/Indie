@@ -1,0 +1,36 @@
+.home_gameCard {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+    width: 50%;
+    justify-content: flex-start;
+    font-family: 'Duru Sans', sans-serif
+}
+
+.home_gameCard * {
+    margin: 0 0
+}
+
+.home_gameCard img{
+    width: 20%;
+    padding-right: 5%;
+}
+
+.home_gameCard_title{
+    font-size: 35px;
+    align-self: flex-start;
+}
+
+.home_gameCard_price{
+    margin-left: auto;
+    font-size: 20px;
+}
+
+.home_gameCard i {
+    align-self: flex-end;
+}
+
+.home_gameCard:hover{
+    background-color: #2e5788;
+    cursor: pointer;
+}

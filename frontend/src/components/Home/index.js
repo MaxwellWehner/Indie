@@ -8,7 +8,8 @@ import { addImagesFromArr } from "../../store/images";
 
 function Home() {
 	// const sessionUser = useSelector((state) => state.session.user);
-	const games = useSelector((state) => state.games);
+    const games = useSelector((state) => state.games);
+	const images = useSelector((state) => state.images);
 	const [imgsToAdd, setImgsToAdd] = useState([]);
 	// const [randomGames, setRandomGames] = useState([]);
 	const dispatch = useDispatch();
@@ -50,18 +51,26 @@ function Home() {
 
 	return (
 		<div>
-			{games && Object.keys(games).length && (
-				<GameCarousel games={[1, 2, 3]} />
-			)}
+			{Object.keys(games).length && <GameCarousel games={[1, 2, 3]} />}
+			<div className="home_gameCard_container">
+				{Object.keys(games).length &&
+					Object.keys(images).length &&
+					Object.keys(games).map((gameId) => (
+						<div key={gameId} className="home_gameCard">
+							<img
+								src={images[games[gameId].Images[0]].imageUrl}
+							/>
 
-			{games &&
-				Object.keys(games).map((gameId) => (
-					<div key={gameId}>
-						<div>game: {games[gameId].title}</div>
-						<div>publisher: {games[gameId].publisherName}</div>
-						<div>release Date: {games[gameId].releaseDate}</div>
-					</div>
-				))}
+							<div className="home_gameCard_title">
+								{games[gameId].title}
+							</div>
+							<div className="home_gameCard_price">
+								${games[gameId].price}
+							</div>
+							<i className="fab fa-windows"></i>
+						</div>
+					))}
+			</div>
 		</div>
 	);
 }
