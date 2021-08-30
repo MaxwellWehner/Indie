@@ -34,7 +34,7 @@ const PublisherPage = () => {
 	useEffect(() => {
 		if (gameIds && Object.keys(games).length) {
 			gameIds.forEach((gameId) => {
-				dispatch(addImagesFromArr(games[gameId].Images));
+				dispatch(addImagesFromArr(games[gameId]?.Images));
 			});
 		}
 	}, [gameIds, games]);
@@ -53,7 +53,10 @@ const PublisherPage = () => {
 							src={images[games[gameId]?.Images[0]]?.imageUrl}
 							className="pub_card_img"
 						/>
-						<div className="pub_card_title">
+						<div
+							className="pub_card_title"
+							onClick={() => history.push(`/games/${gameId}`)}
+						>
 							{games[gameId]?.title}
 						</div>
 						<div className="pub_card_buttons">Edit Game</div>

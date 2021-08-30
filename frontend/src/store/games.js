@@ -66,6 +66,30 @@ export const tenRecentGames = () => async (dispatch) => {
 	return response;
 };
 
+export const createGameThunk =
+	({ title, price, description, developer, releaseDate, totalImages }) =>
+	async (dispatch) => {
+		const response = await csrfFetch("/api/games", {
+			method: "POST",
+			body: JSON.stringify({
+				title,
+				price,
+				description,
+				developer,
+				releaseDate,
+				totalImages,
+			}),
+		});
+		const data = await response.json();
+		data.game.Images.forEach(
+			(image, iIdx) => (data.game["Images"][iIdx] = image.id)
+		);
+		//changes image to imgae ID arr
+		data.game.Publisher = data.game.Publisher.publisherName; //changes publisher name to be direct
+		dispatch(addGame(data.game));
+		return response;
+	};;
+
 export const getGamesByIdArr = (Ids) => async (dispatch) => {
 	const response = await csrfFetch("/api/games/array", {
 		method: "POST",

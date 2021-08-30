@@ -10,6 +10,7 @@ import Home from "./components/Home";
 import SignupFormPagePublisher from "./components/SignupFormPage/SignUpFormPubisher";
 import GamePage from "./components/GamePage";
 import PublisherPage from "./components/PublisherPage";
+import GameForm from "./components/CreateGameForm";
 
 function App() {
 	const dispatch = useDispatch();
@@ -47,6 +48,9 @@ function App() {
 					</Route>
 					<Route path="/publisher">
 						<PublisherPage />
+					</Route>
+					<Route path="/create-game">
+						<GameForm />
 					</Route>
 				</Switch>
 			)}

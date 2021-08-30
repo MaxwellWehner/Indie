@@ -28,6 +28,7 @@
 .pub_card_title{
     font-size: 30px;
     margin-bottom: 15%;
+    cursor: pointer;
 }
 
 .create_game_pub{
@@ -51,7 +52,8 @@
 
 .pub_card_buttons:hover{
     background-color: #2e5788;
-    color: white
+    color: white;
+    cursor: pointer;
 }
 
 #pub_delete_button:hover{

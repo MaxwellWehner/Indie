@@ -149,23 +149,51 @@ router.post(
 	asyncHandler(async (req, res) => {
 		const userId = req.user.id;
 
-		const { price, releaseDate, title, description, developer } = req.body;
+		const {
+			title,
+			price,
+			description,
+			developer,
+			releaseDate,
+			totalImages,
+		} = req.body;
 		if (req.user.userType === "Publisher") {
-			const publisher = Publisher.findOne({
+			const publisher = await Publisher.findOne({
 				where: {
 					userId,
 				},
 			});
-
 			const newGame = await Game.create({
-				price,
-				releaseDate,
+				price: +price,
+				releaseDate: new Date(releaseDate),
 				title,
 				description,
 				developer,
-				publisherId: publisher.Id,
+				publisherId: publisher.id,
 			});
-			return res.json({ game: newGame });
+
+			totalImages.forEach((image) => {
+				(async () => {
+					await Image.create({
+						imageUrl: image,
+						gameId: newGame.id,
+					});
+				})();
+			});
+
+			const returnGame = Game.findByPk(newGame.id, {
+				include: [
+					{
+						model: Image,
+						attributes: ["id"],
+					},
+					{
+						model: Publisher,
+						attributes: ["publisherName"],
+					},
+				],
+			});
+			return res.json({ game: returnGame });
 		} else {
 			return res.json({
 				errors: ["You must be publisher to create a game"],
