@@ -1,0 +1,74 @@
+.carousel_main_img{
+    width: 70%;
+}
+
+.carousel {
+    margin-top: 5%;
+    margin-bottom: 5%;
+    display: flex;
+    height: 300px;
+    width: 60%;
+    align-items: center;
+}
+
+.carousel_game_info img{
+    width: 50%
+}
+
+.carousel_container{
+    display: flex;
+    background-color: #171a21;
+    cursor: pointer;
+}
+
+.carousel_game_info_title{
+    font-size: 40px;
+    text-align: center;
+}
+
+.carousel_game_info{
+    font-family: 'Duru Sans', sans-serif;
+    display:flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+.bottom_info{
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+}
+
+.bottom_info * {
+    margin: 0 0
+}
+
+.nav_car_button_right{
+    background-color: #171a21;
+    width: 50%;
+    height: 40%;
+    background: linear-gradient(90deg, rgba(23,26,33,0) 0%, rgba(23,26,33,0.5) 50%, #171a21 100%);
+    display:flex;
+    align-items: center;
+    margin-left:5px
+}
+
+.nav_car_button_left{
+    background-color: #171a21;
+    width: 50%;
+    height: 40%;
+    background: linear-gradient(-90deg, rgba(23,26,33,0) 0%, rgba(23,26,33,0.5) 50%, #171a21 100%);
+    display:flex;
+    align-items: center;
+    margin-right:5px
+}
+
+.nav_car_button_left:hover{
+    background: linear-gradient(-90deg, rgba(46,87,136,0) 0%, rgba(46,87,136,0.5) 50%, #2e5788 100%);
+    cursor: pointer;
+}
+
+.nav_car_button_right:hover{
+    background: linear-gradient(90deg, rgba(46,87,136,0) 0%, rgba(46,87,136,0.5) 50%, #2e5788 100%);
+    cursor: pointer;
+}

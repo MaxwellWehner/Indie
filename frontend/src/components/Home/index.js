@@ -50,8 +50,8 @@ function Home() {
 	}, [imgsToAdd, dispatch]);
 
 	return (
-		<div>
-			{Object.keys(games).length && <GameCarousel games={[1, 2, 3]} />}
+		<div className="home_container">
+			{Object.keys(games).length && <GameCarousel gameIds={[1, 2, 4]} />}
 			<div className="home_gameCard_container">
 				{Object.keys(games).length &&
 					Object.keys(images).length &&
@@ -67,7 +67,6 @@ function Home() {
 							<div className="home_gameCard_price">
 								${games[gameId].price}
 							</div>
-							<i className="fab fa-windows"></i>
 						</div>
 					))}
 			</div>
