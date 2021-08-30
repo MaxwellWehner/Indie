@@ -37,7 +37,7 @@ const GameCarousel = ({ gameIds }) => {
 	return (
 		<div className="carousel">
 			<div className="nav_car_button_left" onClick={handleLeft}>
-				<i class="fas fa-chevron-left fa-3x"></i>
+				<i className="fas fa-chevron-left fa-3x"></i>
 			</div>
 			<div className="carousel_container" onClick={goToGame}>
 				<img
@@ -61,7 +61,7 @@ const GameCarousel = ({ gameIds }) => {
 				</div>
 			</div>
 			<div className="nav_car_button_right" onClick={handleRight}>
-				<i class="fas fa-chevron-right fa-3x" />
+				<i className="fas fa-chevron-right fa-3x" />
 			</div>
 		</div>
 	);

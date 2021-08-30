@@ -8,7 +8,7 @@ module.exports = {
 				{
 					gameId: 1,
 					imageUrl:
-						"https://www.startpage.com/av/proxy-image?piurl=https%3A%2F%2Fcdn.akamai.steamstatic.com%2Fsteam%2Fapps%2F367520%2Fcapsule_616x353.jpg%3Ft%3D1625363925&sp=1630299867T66baafce6e9819a4f6699a684f6a608e32cf1cf437e143171fa44b5f3edf0ffe",
+						"https://cdn.akamai.steamstatic.com/steam/apps/367520/ss_47f3523dbea462aff2ca4bc9f605faaf80a792b2.1920x1080.jpg?t=1625363925",
 				},
 				{
 					gameId: 1,
@@ -33,7 +33,7 @@ module.exports = {
 				{
 					gameId: 2,
 					imageUrl:
-						"https://cdn.cloudflare.steamstatic.com/steam/apps/262060/header.jpg?t=1618936132",
+						"https://cdn.akamai.steamstatic.com/steam/apps/262060/ss_897ef292768a8e413ffe2dbf18614ec8e1fdbc64.1920x1080.jpg?t=1618936132",
 				},
 				{
 					gameId: 2,
@@ -58,7 +58,7 @@ module.exports = {
 				{
 					gameId: 3,
 					imageUrl:
-						"https://cdn.cloudflare.steamstatic.com/steam/apps/774361/header.jpg?t=1630077819",
+						"https://cdn.akamai.steamstatic.com/steam/apps/774361/ss_88e0cdb23bd866be78c23493574ed50c49db5811.1920x1080.jpg?t=1630077819",
 				},
 				{
 					gameId: 3,
@@ -83,7 +83,7 @@ module.exports = {
 				{
 					gameId: 4,
 					imageUrl:
-						"https://cdn.cloudflare.steamstatic.com/steam/apps/504230/header.jpg?t=1617130992",
+						"https://cdn.akamai.steamstatic.com/steam/apps/504230/ss_a110fe2f50c5828af4b1ff4e7c1ca773a1a7e5aa.1920x1080.jpg?t=1617130992",
 				},
 				{
 					gameId: 4,
@@ -108,7 +108,7 @@ module.exports = {
 				{
 					gameId: 5,
 					imageUrl:
-						"https://cdn.cloudflare.steamstatic.com/steam/apps/311690/header.jpg?t=1622216602",
+						"https://cdn.akamai.steamstatic.com/steam/apps/311690/ss_2c661789dfa6d7e0ab1ecfe3eaa1bed8636c91bb.1920x1080.jpg?t=1622216602",
 				},
 				{
 					gameId: 5,

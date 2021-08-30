@@ -1,0 +1,60 @@
+.previewImage{
+    width: 20%;
+    cursor: pointer;
+}
+
+.gamepage{
+    width: 100%;
+    font-family: 'Duru Sans', sans-serif;
+}
+
+.gamePage_Title{
+    margin-left: 15%;
+    font-size: 40px;
+    margin-top: 2%;
+}
+
+.gamePage_cameCard{
+    width: 70%;
+    display: flex;
+    background-color: #171a21;
+}
+
+.gamePage_mainImg{
+    width: 100%
+}
+
+.gamePage_sideImg{
+    width: 100%;
+    margin-bottom: 5%;
+}
+
+.img_container_mainPage{
+    width: 200%;
+    margin-right: 15px;
+}
+
+.gamePage_main_Info_container{
+    width: 80%
+}
+
+.gamePage_description{
+    margin-bottom: 12%;
+}
+
+.small_info_contaner{
+    display: flex;
+    justify-content: flex-start;
+}
+
+.small_info_contaner > div {
+    margin: 0 0
+}
+
+#small_actual_info{
+    margin-left: 20%;
+}
+
+.small_info_contaner >div > div{
+    margin-bottom: 10px;
+}

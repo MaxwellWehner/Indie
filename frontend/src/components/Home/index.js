@@ -5,14 +5,16 @@ import "./Home.css";
 import { tenRecentGames } from "../../store/games";
 import GameCarousel from "../GameCarousel";
 import { addImagesFromArr } from "../../store/images";
+import { useHistory } from "react-router-dom";
 
 function Home() {
 	// const sessionUser = useSelector((state) => state.session.user);
-    const games = useSelector((state) => state.games);
+	const games = useSelector((state) => state.games);
 	const images = useSelector((state) => state.images);
 	const [imgsToAdd, setImgsToAdd] = useState([]);
 	// const [randomGames, setRandomGames] = useState([]);
 	const dispatch = useDispatch();
+	const history = useHistory();
 
 	useEffect(() => {
 		// dispatch(fiveRandomGames());
@@ -49,16 +51,27 @@ function Home() {
 		}
 	}, [imgsToAdd, dispatch]);
 
+	const goToGame = (gameId) => {
+		history.push(`/games/${gameId}`);
+	};
+
 	return (
 		<div className="home_container">
-			{Object.keys(games).length && <GameCarousel gameIds={[1, 2, 4]} />}
+			{Object.keys(games).length >= 5 &&
+				Object.keys(images).length > 5 && (
+					<GameCarousel gameIds={[1, 2, 4]} />
+				)}
 			<div className="home_gameCard_container">
 				{Object.keys(games).length &&
 					Object.keys(images).length &&
 					Object.keys(games).map((gameId) => (
-						<div key={gameId} className="home_gameCard">
+						<div
+							key={gameId}
+							className="home_gameCard"
+							onClick={() => goToGame(gameId)}
+						>
 							<img
-								src={images[games[gameId].Images[0]].imageUrl}
+								src={images[games[gameId].Images[0]]?.imageUrl}
 							/>
 
 							<div className="home_gameCard_title">

@@ -1,6 +1,6 @@
 import { csrfFetch } from "./csrf.js";
 
-// const ADD_GAME = "games/ADD_GAME";
+const ADD_GAME = "games/ADD_GAME";
 const ADD_GAMES = "games/ADD_GAMES";
 // const REMOVE_GAME = "games/REMOVE_GAME";
 
@@ -9,10 +9,10 @@ const addGames = (games) => ({
 	games,
 });
 
-// const addGame = (game) => ({
-// 	type: ADD_GAME,
-// 	game,
-// });
+const addGame = (game) => ({
+	type: ADD_GAME,
+	game,
+});
 
 // const removeGame = (id) => ({
 // 	type: REMOVE_GAME,
@@ -26,10 +26,31 @@ const addGames = (games) => ({
 // 	return response;
 // };
 
+export const addOneGame = (id) => async (dispatch) => {
+	const response = await csrfFetch(`/api/games/${id}`);
+	const data = await response.json();
+	data.game.Images.forEach(
+		(image, iIdx) => (data.game["Images"][iIdx] = image.id)
+	);
+	//changes image to imgae ID arr
+	data.game.Publisher = data.game.Publisher.publisherName; //changes publisher name to be direct
+
+	dispatch(addGame(data.game));
+	return response;
+};
+
 export const tenRecentGames = () => async (dispatch) => {
 	const response = await csrfFetch("/api/games/");
-    const data = await response.json();
-    data.games.forEach((game, gIdx) => game.Images.forEach((image, iIdx) => data.games[gIdx]['Images'][iIdx] = image.id)) //changes image to imgae ID arr
+	const data = await response.json();
+	data.games.forEach((game, gIdx) =>
+		game.Images.forEach(
+			(image, iIdx) => (data.games[gIdx]["Images"][iIdx] = image.id)
+		)
+	); //changes image to imgae ID arr
+	data.games.forEach(
+		(game, gIdx) =>
+			(data.games[gIdx].Publisher = game.Publisher.publisherName) //changes publisher name to be direct
+	);
 	dispatch(addGames(data.games));
 	return response;
 };
@@ -45,6 +66,10 @@ function reducer(state = initialState, action) {
 				newSateGames[game.id] = game;
 			});
 			return newSateGames;
+		case ADD_GAME:
+			const newAddSateGames = { ...state };
+			newAddSateGames[action.game.id] = action.game;
+			return newAddSateGames;
 		// case REMOVE_USER:
 		// 	newState = Object.assign({}, state, { user: null });
 		// 	return newState;

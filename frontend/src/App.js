@@ -8,6 +8,7 @@ import Navigation from './components/Navigation';
 // import { Modal } from './context/Modal';
 import Home from "./components/Home";
 import SignupFormPagePublisher from "./components/SignupFormPage/SignUpFormPubisher";
+import GamePage from "./components/GamePage";
 
 function App() {
 	const dispatch = useDispatch();
@@ -39,6 +40,9 @@ function App() {
 					</Route>
 					<Route path="/signup-publisher">
 						<SignupFormPagePublisher />
+					</Route>
+					<Route path="/games/:id">
+						<GamePage />
 					</Route>
 				</Switch>
 			)}

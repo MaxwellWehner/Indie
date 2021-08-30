@@ -33,15 +33,20 @@ const validateSignup = [
 router.get(
 	"",
 	asyncHandler(async (req, res) => {
-        const games = await Game.findAll({
+		const games = await Game.findAll({
 			order: [["releaseDate", "DESC"]],
-            limit: 10,
-            include: [{
-                model: Image,
-                attributes: ['id']
-            }]
-        });
-
+			limit: 10,
+			include: [
+				{
+					model: Image,
+					attributes: ["id"],
+				},
+				{
+					model: Publisher,
+					attributes: ["publisherName"],
+				},
+			],
+		});
 
 		return res.json({
 			games,
@@ -68,7 +73,18 @@ router.get(
 	"/:id(\\d+)",
 	asyncHandler(async (req, res) => {
 		const { id } = req.params;
-		const game = await Game.findByPk(id);
+		const game = await Game.findByPk(id, {
+			include: [
+				{
+					model: Image,
+					attributes: ["id"],
+				},
+				{
+					model: Publisher,
+					attributes: ["publisherName"],
+				},
+			],
+		});
 
 		return res.json({
 			game,
