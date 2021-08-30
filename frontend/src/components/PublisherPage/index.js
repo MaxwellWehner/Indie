@@ -45,11 +45,13 @@ const PublisherPage = () => {
 
 	const handleDelete = (gameId) => {
 		(async () => {
-			dispatch(removeGameThunk(gameId));
-			const ids = await dispatch(getPublishersGameIds(user.id));
-			setGameIds(ids);
-			await dispatch(getGamesByIdArr(ids));
+			await dispatch(removeGameThunk(gameId));
+			const newGameIDs = [...gameIds];
+			const idx = newGameIDs.indexOf(gameId);
+			newGameIDs.splice(idx, 1);
+			setGameIds([...newGameIDs]);
 		})();
+
 	};
 
 	if (!user) {

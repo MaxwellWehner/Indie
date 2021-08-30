@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Redirect } from "react-router-dom";
+import { Redirect, useHistory } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { createGameThunk } from "../../store/games";
 import * as sessionActions from "../../store/session";
@@ -17,14 +17,11 @@ function GameForm() {
 	const [image, setImage] = useState("");
 	const [totalImages, setTotalImages] = useState([]);
 	const [errors, setErrors] = useState([]);
+	const history = useHistory();
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
 		setErrors([]);
-
-		if (image) {
-			setTotalImages((prevState) => [...prevState, ...image]);
-		}
 
 		return dispatch(
 			createGameThunk({
@@ -36,6 +33,7 @@ function GameForm() {
 				totalImages,
 			})
 		).catch(async (res) => {
+			history.push("/publisher");
 			// const data = await res.json();
 			// if (data && data.errors) setErrors(data.errors);
 		});
@@ -107,7 +105,7 @@ function GameForm() {
 					className="form_button"
 					onClick={(e) => handleImageAdd(e)}
 				>
-					Add another Image
+					Add Image
 				</button>
 				<button type="submit" className="form_button">
 					Create

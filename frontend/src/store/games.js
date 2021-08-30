@@ -42,7 +42,6 @@ export const removeGameThunk = (gameId) => async (dispatch) => {
 		method: "DELETE",
 	});
 	// const data = await response.json();
-	console.log(gameId, "((((((((((((((((((((((((((((((((((((");
 	dispatch(removeGame(gameId));
 	// return data;
 };
