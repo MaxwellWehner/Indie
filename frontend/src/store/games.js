@@ -37,6 +37,30 @@ export const getPublishersGameIds = (userId) => async () => {
 	return gameIds;
 };
 
+export const editGameThunk =
+	({ title, price, description, developer, releaseDate, totalImages, id }) =>
+	async (dispatch) => {
+		const response = await csrfFetch(`/api/games/${id}`, {
+			method: "PUT",
+			body: JSON.stringify({
+				title,
+				price,
+				description,
+				developer,
+				releaseDate,
+				totalImages,
+			}),
+		});
+		const data = await response.json();
+		data.game.Images.forEach(
+			(image, iIdx) => (data.game["Images"][iIdx] = image.id)
+		);
+		//changes image to imgae ID arr
+		data.game.Publisher = data.game.Publisher.publisherName; //changes publisher name to be direct
+		dispatch(addGame(data.game));
+		return response;
+	};
+
 export const removeGameThunk = (gameId) => async (dispatch) => {
 	const response = await csrfFetch(`/api/games/${gameId}`, {
 		method: "DELETE",

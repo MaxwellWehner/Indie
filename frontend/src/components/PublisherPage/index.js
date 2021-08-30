@@ -74,7 +74,12 @@ const PublisherPage = () => {
 						>
 							{games[gameId]?.title}
 						</div>
-						<div className="pub_card_buttons">Edit Game</div>
+						<div
+							className="pub_card_buttons"
+							onClick={() => history.push(`/edit-game/${gameId}`)}
+						>
+							Edit Game
+						</div>
 						<div
 							className="pub_card_buttons"
 							id="pub_delete_button"

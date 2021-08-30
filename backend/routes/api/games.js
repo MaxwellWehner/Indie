@@ -208,16 +208,36 @@ router.put(
 	asyncHandler(async (req, res) => {
 		const userId = req.user.id;
 		const { id } = req.params;
-		const game = Game.findByPk(id);
+		const game = await Game.findByPk(id, {
+			include: [
+				{
+					model: Image,
+					attributes: ["id"],
+				},
+			],
+		});
 		if (req.user.userType === "Publisher") {
-			const publisher = Publisher.findOne({
+			const publisher = await Publisher.findOne({
 				where: {
 					userId,
 				},
 			});
-			const { price, releaseDate, title, description, developer } =
-				req.body;
+			const {
+				price,
+				releaseDate,
+				title,
+				description,
+				developer,
+				totalImages,
+			} = req.body;
 			if (game.publisherId === publisher.id) {
+				game.Images.forEach((image) => {
+					(async () => {
+						const newimage = await Image.findByPk(image.id);
+						await newimage.destroy();
+					})();
+				});
+
 				const newGame = await game.update({
 					price,
 					releaseDate,
@@ -226,6 +246,16 @@ router.put(
 					developer,
 					// publisherId: publisher.Id,
 				});
+
+				totalImages.forEach((image) => {
+					(async () => {
+						await Image.create({
+							imageUrl: image,
+							gameId: newGame.id,
+						});
+					})();
+				});
+
 				return res.json({ game: newGame });
 			} else {
 				return res.json({
@@ -246,7 +276,6 @@ router.delete(
 	asyncHandler(async (req, res) => {
 		const userId = req.user.id;
 		const id = req.params.id;
-		console.log(id, "==================================================");
 		const game = await Game.findByPk(id);
 		if (req.user.userType === "Publisher") {
 			const publisher = await Publisher.findOne({

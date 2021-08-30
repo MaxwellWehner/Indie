@@ -11,6 +11,7 @@ import SignupFormPagePublisher from "./components/SignupFormPage/SignUpFormPubis
 import GamePage from "./components/GamePage";
 import PublisherPage from "./components/PublisherPage";
 import GameForm from "./components/CreateGameForm";
+import EditGameForm from "./components/CreateGameForm/EditGameForm";
 
 function App() {
 	const dispatch = useDispatch();
@@ -51,6 +52,9 @@ function App() {
 					</Route>
 					<Route path="/create-game">
 						<GameForm />
+					</Route>
+					<Route path="/edit-game/:id">
+						<EditGameForm />
 					</Route>
 				</Switch>
 			)}
