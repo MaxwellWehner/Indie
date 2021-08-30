@@ -5,20 +5,22 @@ import './Modal.css';
 const ModalContext = React.createContext();
 
 export function ModalProvider({ children }) {
-  const modalRef = useRef();
-  const [value, setValue] = useState();
-  console.log('value', value);
+	const modalRef = useRef();
+	const [value, setValue] = useState();
+	//   console.log('value', value);
 
-  useEffect(() => {
-    setValue(modalRef.current);
-  }, []);
+	useEffect(() => {
+		setValue(modalRef.current);
+	}, []);
 
-  return (
-    <>
-      <ModalContext.Provider value={value}>{children}</ModalContext.Provider>
-      <div ref={modalRef} />
-    </>
-  );
+	return (
+		<>
+			<ModalContext.Provider value={value}>
+				{children}
+			</ModalContext.Provider>
+			<div ref={modalRef} />
+		</>
+	);
 }
 
 export function Modal({ onClose, children }) {

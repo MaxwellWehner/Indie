@@ -1,12 +1,12 @@
 import { csrfFetch } from "./csrf.js";
 
 // const ADD_GAME = "games/ADD_GAME";
-const ADD_GAMES = "games/ADD_GAMES";
+const ADD_IMAGES = "images/ADD_IMAGES";
 // const REMOVE_GAME = "games/REMOVE_GAME";
 
-const addGames = (games) => ({
-	type: ADD_GAMES,
-	games,
+const addImages = (images) => ({
+	type: ADD_IMAGES,
+	images,
 });
 
 // const addGame = (game) => ({
@@ -26,11 +26,15 @@ const addGames = (games) => ({
 // 	return response;
 // };
 
-export const tenRecentGames = () => async (dispatch) => {
-	const response = await csrfFetch("/api/games/");
-    const data = await response.json();
-    data.games.forEach((game, gIdx) => game.Images.forEach((image, iIdx) => data.games[gIdx]['Images'][iIdx] = image.id)) //changes image to imgae ID arr
-	dispatch(addGames(data.games));
+export const addImagesFromArr = (arr) => async (dispatch) => {
+	const response = await csrfFetch("/api/images/arr", {
+		method: "POST",
+		body: JSON.stringify({
+			arr,
+		}),
+	});
+	const data = await response.json();
+	dispatch(addImages(data.images));
 	return response;
 };
 
@@ -39,12 +43,12 @@ const initialState = {};
 function reducer(state = initialState, action) {
 	// let newState;
 	switch (action.type) {
-		case ADD_GAMES:
-			const newSateGames = { ...state };
-			action.games.forEach((game) => {
-				newSateGames[game.id] = game;
+		case ADD_IMAGES:
+			const newImageState = { ...state };
+			action.images.forEach((image) => {
+				newImageState[image.id] = image;
 			});
-			return newSateGames;
+			return newImageState;
 		// case REMOVE_USER:
 		// 	newState = Object.assign({}, state, { user: null });
 		// 	return newState;

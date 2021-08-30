@@ -4,8 +4,7 @@ const asyncHandler = require("express-async-handler");
 
 const { handleValidationErrors } = require("../../utils/validation");
 const { requireAuth } = require("../../utils/auth");
-const { User, Shopper, Publisher, Game } = require("../../db/models");
-const { sequelize } = require("../../db/models");
+const {  Publisher, Game, Image } = require("../../db/models");
 const { Op } = require("sequelize");
 
 const router = express.Router();
@@ -34,10 +33,15 @@ const validateSignup = [
 router.get(
 	"",
 	asyncHandler(async (req, res) => {
-		const games = await Game.findAll({
+        const games = await Game.findAll({
 			order: [["releaseDate", "DESC"]],
-			limit: 10,
-		});
+            limit: 10,
+            include: [{
+                model: Image,
+                attributes: ['id']
+            }]
+        });
+
 
 		return res.json({
 			games,
@@ -45,20 +49,20 @@ router.get(
 	})
 );
 
-//get 5 random games
-router.get(
-	"/random",
-	asyncHandler(async (req, res) => {
-		const games = await Game.findAll({
-			order: sequelize.random(),
-			limit: 1,
-		});
+// //get 5 random games
+// router.get(
+// 	"/random",
+// 	asyncHandler(async (req, res) => {
+// 		const games = await Game.findAll({
+// 			order: sequelize.random(),
+// 			limit: 1,
+// 		});
 
-		return res.json({
-			games,
-		});
-	})
-);
+// 		return res.json({
+// 			games,
+// 		});
+// 	})
+// );
 
 router.get(
 	"/:id(\\d+)",
