@@ -37,3 +37,8 @@
     height: 50%;
     margin-bottom: 2%;
 }
+
+.img-preview_form img:hover{
+    box-shadow: 0px 0px 5px red;
+   cursor: pointer;
+}

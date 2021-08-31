@@ -17,6 +17,7 @@
     background-color: #171a21;
     height: 400px;
     font-family: 'Duru Sans', sans-serif;
+    margin-bottom: 3%;
 }
 
 .pub_card_img{
@@ -24,6 +25,7 @@
     margin-top: 10%;
     margin-bottom: 10%;
     cursor: pointer;
+    height: 150px;
 }
 
 .pub_card_title{
