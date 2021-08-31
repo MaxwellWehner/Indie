@@ -84,7 +84,7 @@ function EditGameForm() {
 
 	return (
 		<>
-			<form onSubmit={handleSubmit} className="signUp_form">
+			<form onSubmit={handleSubmit} className="signUp_form game_form">
 				<h1>Edit {game?.title}</h1>
 				<ul>
 					{errors.map((error, idx) => (
@@ -124,31 +124,32 @@ function EditGameForm() {
 					onChange={(e) => setReleaseDate(e.target.value)}
 				/>
 				<label>Image Url</label>
-				<input
-					type="text"
-					value={image}
-					onChange={(e) => setImage(e.target.value)}
-				/>
-				<div>
-					Image Preview(click to remove):
+				<div className="img_input_with_btn">
+					<input
+						type="text"
+						value={image}
+						onChange={(e) => setImage(e.target.value)}
+					/>
+					<button
+						className="form_button"
+						onClick={(e) => handleImageAdd(e)}
+					>
+						Add Image
+					</button>
+				</div>
+				<label>Image Preview(click to remove):</label>
+				<div className="img-preview_form">
 					{totalImages.map((imgUrl, i) => (
-						<div key={i}>
-							<img
-								alt="user input img"
-								src={imgUrl}
-								onClick={() => removeImage(imgUrl)}
-							/>
-						</div>
+						<img
+							key={i}
+							alt="user input img"
+							src={imgUrl}
+							onClick={() => removeImage(imgUrl)}
+						/>
 					))}
 				</div>
-				<button
-					className="form_button"
-					onClick={(e) => handleImageAdd(e)}
-				>
-					Add Image
-				</button>
 				<button type="submit" className="form_button">
-					Create
+					Edit
 				</button>
 			</form>
 		</>

@@ -44,9 +44,16 @@ function GameForm() {
 		setImage("");
 	};
 
+	const removeImage = (url) => {
+		const idx = totalImages.indexOf(url);
+		const cpy = [...totalImages];
+		cpy.splice(idx, 1);
+		setTotalImages(cpy);
+	};
+
 	return (
 		<>
-			<form onSubmit={handleSubmit} className="signUp_form">
+			<form onSubmit={handleSubmit} className="signUp_form game_form">
 				<h1>Create A Game</h1>
 				<ul>
 					{errors.map((error, idx) => (
@@ -87,25 +94,30 @@ function GameForm() {
 					required
 				/>
 				<label>Image Url</label>
-				<input
-					type="text"
-					value={image}
-					onChange={(e) => setImage(e.target.value)}
-				/>
-				<div>
-					Image Preview:
-					{totalImages.map((imgUrl) => (
-						<div key={imgUrl}>
-							<img alt="user input img" src={imgUrl} />
-						</div>
+				<div className="img_input_with_btn">
+					<input
+						type="text"
+						value={image}
+						onChange={(e) => setImage(e.target.value)}
+					/>
+					<button
+						className="form_button"
+						onClick={(e) => handleImageAdd(e)}
+					>
+						Add Image
+					</button>
+				</div>
+				<label>Image Preview:</label>
+				<div className="img-preview_form">
+					{totalImages.map((imgUrl, i) => (
+						<img
+							key={i}
+							alt="user input img"
+							onClick={() => removeImage(imgUrl)}
+							src={imgUrl}
+						/>
 					))}
 				</div>
-				<button
-					className="form_button"
-					onClick={(e) => handleImageAdd(e)}
-				>
-					Add Image
-				</button>
 				<button type="submit" className="form_button">
 					Create
 				</button>

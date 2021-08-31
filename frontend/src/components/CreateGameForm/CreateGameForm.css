@@ -1,0 +1,39 @@
+#root .game_form{
+    height: 900px;
+}
+
+.game_form textarea{
+    width: 60%;
+    margin-left: 20%;
+    margin-bottom: 3%;
+}
+
+.img_input_with_btn{
+    display: flex;
+    width: 100%;
+}
+
+.img_input_with_btn button{
+    margin-left: 3%;
+}
+
+.img_input_with_btn input{
+    width: 40%;
+    margin-right: 0;
+    margin-bottom: 2.5%;
+}
+
+.img-preview_form {
+    height: 300px;
+    width: 60%;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-left: 20%;
+}
+
+.img-preview_form img{
+    width: 80px;
+    height: 50%;
+    margin-bottom: 2%;
+}
