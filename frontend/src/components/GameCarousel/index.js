@@ -12,7 +12,7 @@ const GameCarousel = ({ gameIds }) => {
 
 	useEffect(() => {
 		setCurrentGame(games[gameIds[currentGameIdx]]);
-	}, [currentGameIdx]);
+	}, [currentGameIdx, games, gameIds]);
 
 	const handleRight = () => {
 		if (currentGameIdx === gameIds.length - 1) {
@@ -43,16 +43,29 @@ const GameCarousel = ({ gameIds }) => {
 				<img
 					src={images[currentGame.Images[0]]?.imageUrl}
 					className="carousel_main_img"
+					alt="main game img"
 				/>
 				<div className="carousel_game_info">
 					<div className="carousel_game_info_title">
 						{currentGame.title}
 					</div>
 					<div className="img_container">
-						<img src={images[currentGame.Images[1]]?.imageUrl} />
-						<img src={images[currentGame.Images[2]]?.imageUrl} />
-						<img src={images[currentGame.Images[3]]?.imageUrl} />
-						<img src={images[currentGame.Images[4]]?.imageUrl} />
+						<img
+							src={images[currentGame.Images[1]]?.imageUrl}
+							alt="game img 1"
+						/>
+						<img
+							src={images[currentGame.Images[2]]?.imageUrl}
+							alt="game img 2"
+						/>
+						<img
+							src={images[currentGame.Images[3]]?.imageUrl}
+							alt="game img 3"
+						/>
+						<img
+							src={images[currentGame.Images[4]]?.imageUrl}
+							alt="game img 4"
+						/>
 					</div>
 					<div className="bottom_info">
 						<div>Now Available</div>

@@ -61,21 +61,6 @@ router.get(
 	})
 );
 
-// //get 5 random games
-// router.get(
-// 	"/random",
-// 	asyncHandler(async (req, res) => {
-// 		const games = await Game.findAll({
-// 			order: sequelize.random(),
-// 			limit: 1,
-// 		});
-
-// 		return res.json({
-// 			games,
-// 		});
-// 	})
-// );
-
 router.get(
 	"/:id(\\d+)",
 	asyncHandler(async (req, res) => {
@@ -102,7 +87,6 @@ router.get(
 //get games form userId
 router.get(
 	"/publisher/:id(\\d+)",
-	// requireAuth,
 	asyncHandler(async (req, res) => {
 		const userId = +req.params.id;
 
@@ -257,7 +241,6 @@ router.put(
 					title,
 					description,
 					developer,
-					// publisherId: publisher.Id,
 				});
 
 				totalImages.forEach((image) => {

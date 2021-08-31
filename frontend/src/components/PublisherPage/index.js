@@ -41,7 +41,7 @@ const PublisherPage = () => {
 				dispatch(addImagesFromArr(games[gameId]?.Images));
 			});
 		}
-	}, [gameIds, games]);
+	}, [gameIds, games, dispatch]);
 
 	const handleDelete = (gameId) => {
 		(async () => {
@@ -51,7 +51,6 @@ const PublisherPage = () => {
 			newGameIDs.splice(idx, 1);
 			setGameIds([...newGameIDs]);
 		})();
-
 	};
 
 	if (!user) {
@@ -67,6 +66,7 @@ const PublisherPage = () => {
 							onClick={() => history.push(`/games/${gameId}`)}
 							src={images[games[gameId]?.Images[0]]?.imageUrl}
 							className="pub_card_img"
+							alt="publisher card img"
 						/>
 						<div
 							className="pub_card_title"

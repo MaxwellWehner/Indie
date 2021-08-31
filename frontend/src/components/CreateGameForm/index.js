@@ -1,14 +1,11 @@
 import React, { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { Redirect, useHistory } from "react-router-dom";
-import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { useHistory } from "react-router-dom";
 import { createGameThunk } from "../../store/games";
-import * as sessionActions from "../../store/session";
 import "./CreateGameForm.css";
 
 function GameForm() {
 	const dispatch = useDispatch();
-	const sessionUser = useSelector((state) => state.session.user);
 	const [price, setPrice] = useState("");
 	const [title, setTitle] = useState("");
 	const [description, setDescription] = useState("");
@@ -99,7 +96,7 @@ function GameForm() {
 					Image Preview:
 					{totalImages.map((imgUrl) => (
 						<div key={imgUrl}>
-							<img src={imgUrl} />
+							<img alt="user input img" src={imgUrl} />
 						</div>
 					))}
 				</div>

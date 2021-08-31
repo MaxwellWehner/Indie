@@ -1,17 +1,13 @@
-import { set } from "js-cookie";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Redirect, useHistory, useParams } from "react-router-dom";
-import { Link } from "react-router-dom";
-import { addOneGame, createGameThunk, editGameThunk } from "../../store/games";
+import { useHistory, useParams } from "react-router-dom";
+import { addOneGame, editGameThunk } from "../../store/games";
 import { addImagesFromArr } from "../../store/images";
-import * as sessionActions from "../../store/session";
 import "./CreateGameForm.css";
 
 function EditGameForm() {
 	const { id } = useParams();
 	const dispatch = useDispatch();
-	const sessionUser = useSelector((state) => state.session.user);
 	const [price, setPrice] = useState("");
 	const [title, setTitle] = useState("");
 	const [description, setDescription] = useState("");
@@ -28,13 +24,13 @@ function EditGameForm() {
 		if (!game) {
 			dispatch(addOneGame(id));
 		}
-	});
+	}, [dispatch, game, id]);
 
 	useEffect(() => {
 		if (game) {
 			dispatch(addImagesFromArr(game?.Images));
 		}
-	}, [game]);
+	}, [game, dispatch]);
 
 	useEffect(() => {
 		if (game && images) {
@@ -138,6 +134,7 @@ function EditGameForm() {
 					{totalImages.map((imgUrl, i) => (
 						<div key={i}>
 							<img
+								alt="user input img"
 								src={imgUrl}
 								onClick={() => removeImage(imgUrl)}
 							/>

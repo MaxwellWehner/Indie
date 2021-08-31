@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-// import { NavLink } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import "./Home.css";
 import { tenRecentGames } from "../../store/games";
@@ -8,7 +7,6 @@ import { addImagesFromArr } from "../../store/images";
 import { useHistory } from "react-router-dom";
 
 function Home() {
-	// const sessionUser = useSelector((state) => state.session.user);
 	const games = useSelector((state) => state.games);
 	const images = useSelector((state) => state.images);
 	const [imgsToAdd, setImgsToAdd] = useState([]);
@@ -17,7 +15,6 @@ function Home() {
 	const history = useHistory();
 
 	useEffect(() => {
-		// dispatch(fiveRandomGames());
 		dispatch(tenRecentGames());
 	}, [dispatch]);
 
@@ -72,6 +69,7 @@ function Home() {
 						>
 							<img
 								src={images[games[gameId].Images[0]]?.imageUrl}
+								alt="card info img"
 							/>
 
 							<div className="home_gameCard_title">

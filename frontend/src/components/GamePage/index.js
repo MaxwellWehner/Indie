@@ -58,6 +58,7 @@ const GamePage = () => {
 										key={imageId}
 										src={images[imageId]?.imageUrl}
 										className="previewImage"
+										alt="preview game img"
 										onClick={() => handleMainImg(imageId)}
 									/>
 								))}
@@ -67,6 +68,7 @@ const GamePage = () => {
 							<img
 								src={images[game.Images[0]]?.imageUrl}
 								className="gamePage_sideImg"
+								alt="side game img"
 							/>
 							<div className="gamePage_description">
 								{game.description}

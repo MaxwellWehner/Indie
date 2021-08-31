@@ -19,13 +19,6 @@ const removeGame = (id) => ({
 	id,
 });
 
-// export const fiveRandomGames = () => async (dispatch) => {
-// 	const response = await csrfFetch("/api/games/random");
-// 	const data = await response.json();
-// 	dispatch(addGames(data.games));
-// 	return response;
-// };
-
 export const getPublishersGameIds = (userId) => async () => {
 	const response = await csrfFetch(`/api/games/publisher/${userId}`);
 	const data = await response.json();
@@ -65,9 +58,9 @@ export const removeGameThunk = (gameId) => async (dispatch) => {
 	const response = await csrfFetch(`/api/games/${gameId}`, {
 		method: "DELETE",
 	});
-	// const data = await response.json();
+	const data = await response.json();
 	dispatch(removeGame(gameId));
-	// return data;
+	return data;
 };
 
 export const addOneGame = (id) => async (dispatch) => {
