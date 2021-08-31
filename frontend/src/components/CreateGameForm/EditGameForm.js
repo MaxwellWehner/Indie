@@ -1,13 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useHistory, useParams } from "react-router-dom";
+import { Redirect, useHistory, useParams } from "react-router-dom";
 import { addOneGame, editGameThunk } from "../../store/games";
 import { addImagesFromArr } from "../../store/images";
+import { getPublisherIdThunk } from "../../store/session";
 import "./CreateGameForm.css";
 
 function EditGameForm() {
 	const { id } = useParams();
 	const dispatch = useDispatch();
+	const user = useSelector((state) => state.session.user);
 	const [price, setPrice] = useState("");
 	const [title, setTitle] = useState("");
 	const [description, setDescription] = useState("");
@@ -16,9 +18,31 @@ function EditGameForm() {
 	const [image, setImage] = useState("");
 	const [totalImages, setTotalImages] = useState([]);
 	const [errors, setErrors] = useState([]);
+	const [pubId, setPubId] = useState(null);
 	const history = useHistory();
 	const game = useSelector((state) => state?.games[id]);
 	const images = useSelector((state) => state.images);
+
+	useEffect(() => {
+		(async () => {
+			if (user) {
+				if (user.userType !== "Publisher") {
+					history.push("/");
+				} else {
+					const data = await dispatch(getPublisherIdThunk(user.id));
+					setPubId(data.pubId);
+				}
+			}
+		})();
+	}, [user, history, dispatch]);
+
+	useEffect(() => {
+		if (game && pubId) {
+			if (pubId !== game.publisherId) {
+				history.push("/");
+			}
+		}
+	}, [game, pubId, history]);
 
 	useEffect(() => {
 		if (!game) {
@@ -81,6 +105,10 @@ function EditGameForm() {
 		cpy.splice(idx, 1);
 		setTotalImages(cpy);
 	};
+
+	if (!user) {
+		return <Redirect to="/" />;
+	}
 
 	return (
 		<>

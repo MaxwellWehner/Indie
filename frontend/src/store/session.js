@@ -70,6 +70,12 @@ export const logout = () => async (dispatch) => {
   return response;
 };
 
+export const getPublisherIdThunk = (userId) => async () => {
+	const response = await csrfFetch(`/api/users/pub/${userId}`);
+	const data = await response.json();
+	return data;
+};
+
 const initialState = { user: null };
 
 function reducer(state = initialState, action) {

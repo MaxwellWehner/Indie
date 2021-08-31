@@ -3,7 +3,7 @@ const { check } = require("express-validator");
 const asyncHandler = require("express-async-handler");
 
 const { handleValidationErrors } = require("../../utils/validation");
-const { setTokenCookie } = require("../../utils/auth");
+const { setTokenCookie, requireAuth } = require("../../utils/auth");
 const { User, Shopper, Publisher } = require("../../db/models");
 
 const router = express.Router();
@@ -50,6 +50,26 @@ const validateSignupPublisher = [
 		.withMessage("Please provide a name for your publishing company"),
 	handleValidationErrors,
 ];
+
+//get publisherId from userId(currentUser)
+router.get(
+	"/pub/:id(\\d+)",
+	requireAuth,
+	asyncHandler(async (req, res) => {
+		const { id } = req.params;
+		if (req.user.userType === "Publisher") {
+			const publisher = await Publisher.findOne({
+				where: {
+					userId: id,
+				},
+			});
+			return res.json({
+				pubId: publisher.id,
+			});
+		}
+		return res.json({ error: "Access Denied" });
+	})
+);
 
 // Sign up
 router.post(
