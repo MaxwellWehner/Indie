@@ -38,11 +38,11 @@ function EditGameForm() {
 
 	useEffect(() => {
 		if (game && images) {
-			setPrice(game.price);
+			setPrice(+game.price);
 			setTitle(game.title);
 			setDescription(game.description);
 			setDeveloper(game.developer);
-			setReleaseDate(game.releaseDate);
+			setReleaseDate(game.releaseDate.slice(0, 10));
 			const arr = [];
 			game?.Images.forEach((imageId) => {
 				arr.push(images[imageId]?.imageUrl);
@@ -64,11 +64,13 @@ function EditGameForm() {
 				totalImages,
 				id,
 			})
-		).catch(async (res) => {
-			history.push("/publisher");
-			// const data = await res.json();
-			// if (data && data.errors) setErrors(data.errors);
-		});
+		)
+			.then(() => history.push("/publisher"))
+			.catch(async (res) => {
+				console.log(res);
+				const data = await res.json();
+				if (data && data.errors) setErrors(data.errors);
+			});
 	};
 
 	const handleImageAdd = (e) => {
@@ -87,7 +89,7 @@ function EditGameForm() {
 	return (
 		<>
 			<form onSubmit={handleSubmit} className="signUp_form">
-				<h1>Create A Game</h1>
+				<h1>Edit {game?.title}</h1>
 				<ul>
 					{errors.map((error, idx) => (
 						<li key={idx}>{error}</li>

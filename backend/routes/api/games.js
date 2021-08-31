@@ -9,23 +9,30 @@ const { Op } = require("sequelize");
 
 const router = express.Router();
 
-const validateSignup = [
-	check("email")
+const validateCreateGame = [
+	check("price")
 		.exists({ checkFalsy: true })
-		.isEmail()
-		.withMessage("Please provide a valid email."),
-	check("username")
+		.isInt({ min: 1 })
+		.withMessage("Please provide a price of at least 1 dollar"),
+	check("title")
 		.exists({ checkFalsy: true })
-		.isLength({ min: 4 })
-		.withMessage("Please provide a username with at least 4 characters."),
-	check("username")
-		.not()
-		.isEmail()
-		.withMessage("Username cannot be an email."),
-	check("password")
+		.isLength({ min: 1, max: 50 })
+		.withMessage(
+			"Please provide a title with at least 1 characters and less than 50."
+		),
+	check("description")
+		.isLength({ max: 300 })
+		.withMessage("Description must be less than 300  charaters."),
+	check("developer")
+		.isLength({ min: 1, max: 50 })
+		.withMessage(
+			"Devloper name must be less than 50 charaters and greater than 1."
+		),
+	check("releaseDate")
 		.exists({ checkFalsy: true })
-		.isLength({ min: 6 })
-		.withMessage("Password must be 6 characters or more."),
+		.isISO8601()
+		.toDate()
+		.withMessage("Please provide a valid date"),
 	handleValidationErrors,
 ];
 
@@ -96,10 +103,10 @@ router.get(
 router.get(
 	"/publisher/:id(\\d+)",
 	// requireAuth,
-    asyncHandler(async (req, res) => {
-        const userId = +req.params.id;
+	asyncHandler(async (req, res) => {
+		const userId = +req.params.id;
 
-        const publisher = await Publisher.findOne({
+		const publisher = await Publisher.findOne({
 			attributes: [],
 			where: {
 				userId,
@@ -112,8 +119,8 @@ router.get(
 			],
 		});
 
-        return res.json({ publisher });
-    })
+		return res.json({ publisher });
+	})
 );
 
 //get games from arr of Ids
@@ -146,6 +153,7 @@ router.post(
 router.post(
 	"",
 	requireAuth,
+	validateCreateGame,
 	asyncHandler(async (req, res) => {
 		const userId = req.user.id;
 
@@ -181,7 +189,7 @@ router.post(
 				})();
 			});
 
-			const returnGame = Game.findByPk(newGame.id, {
+			const returnGame = await Game.findByPk(newGame.id, {
 				include: [
 					{
 						model: Image,
@@ -205,6 +213,7 @@ router.post(
 router.put(
 	"/:id(\\d+)",
 	requireAuth,
+	validateCreateGame,
 	asyncHandler(async (req, res) => {
 		const userId = req.user.id;
 		const { id } = req.params;
@@ -213,6 +222,10 @@ router.put(
 				{
 					model: Image,
 					attributes: ["id"],
+				},
+				{
+					model: Publisher,
+					attributes: ["publisherName"],
 				},
 			],
 		});
@@ -298,27 +311,5 @@ router.delete(
 		}
 	})
 );
-
-
-// Sign up
-// router.post(
-// 	"",
-// 	validateSignup,
-// 	asyncHandler(async (req, res) => {
-// 		const { email, password, username, userType, publisherName } = req.body;
-// 		const user = await User.signup({ email, username, password, userType });
-
-// 		if (userType === "Shopper") {
-// 			await Shopper.create({
-// 				userId: user.id,
-// 				wallet: 0,
-// 			});
-// 		}
-
-// 		return res.json({
-// 			user,
-// 		});
-// 	})
-// );
 
 module.exports = router;

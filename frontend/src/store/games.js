@@ -58,7 +58,7 @@ export const editGameThunk =
 		//changes image to imgae ID arr
 		data.game.Publisher = data.game.Publisher.publisherName; //changes publisher name to be direct
 		dispatch(addGame(data.game));
-		return response;
+		return data.game;
 	};
 
 export const removeGameThunk = (gameId) => async (dispatch) => {
@@ -120,7 +120,7 @@ export const createGameThunk =
 		//changes image to imgae ID arr
 		data.game.Publisher = data.game.Publisher.publisherName; //changes publisher name to be direct
 		dispatch(addGame(data.game));
-		return response;
+		return data.game;
 	};
 
 export const getGamesByIdArr = (Ids) => async (dispatch) => {
@@ -160,7 +160,6 @@ function reducer(state = initialState, action) {
 			newAddSateGames[action.game.id] = action.game;
 			return newAddSateGames;
 		case REMOVE_GAME:
-			console.log("in reducer");
 			const removeState = { ...state };
 			delete removeState[action.id];
 			return removeState;

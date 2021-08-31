@@ -32,11 +32,13 @@ function GameForm() {
 				releaseDate,
 				totalImages,
 			})
-		).catch(async (res) => {
-			history.push("/publisher");
-			// const data = await res.json();
-			// if (data && data.errors) setErrors(data.errors);
-		});
+		)
+			.then(() => history.push("/publisher"))
+			.catch(async (res) => {
+				console.log(res);
+				const data = await res.json();
+				if (data && data.errors) setErrors(data.errors);
+			});
 	};
 
 	const handleImageAdd = (e) => {

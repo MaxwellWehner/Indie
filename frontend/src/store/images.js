@@ -33,7 +33,10 @@ export const addImagesFromArr = (arr) => async (dispatch) => {
 			arr,
 		}),
 	});
-	const data = await response.json();
+    const data = await response.json();
+	if (data.skip) {
+		return;
+	}
 	dispatch(addImages(data.images));
 	return response;
 };
