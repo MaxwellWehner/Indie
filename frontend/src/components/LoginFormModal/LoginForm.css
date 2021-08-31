@@ -40,4 +40,15 @@
     border: none;
     border-radius: 2px;
     margin-right: 15px;
+    font-size: 12px;
+    margin-left: 0;
+    margin-right: 0;
+}
+
+.logIn_buttons{
+    display: flex;
+    flex-direction: row;
+    margin-left: 20%;
+    width: 61%;
+    justify-content: space-between;
 }

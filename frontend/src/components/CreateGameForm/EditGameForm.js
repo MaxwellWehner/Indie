@@ -106,6 +106,7 @@ function EditGameForm() {
 				<label>Price</label>
 				<input
 					type="number"
+					step=".01"
 					value={price}
 					onChange={(e) => setPrice(e.target.value)}
 					required

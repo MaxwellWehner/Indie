@@ -12,7 +12,7 @@ const router = express.Router();
 const validateCreateGame = [
 	check("price")
 		.exists({ checkFalsy: true })
-		.isInt({ min: 1 })
+		.isFloat({ min: 1 })
 		.withMessage("Please provide a price of at least 1 dollar"),
 	check("title")
 		.exists({ checkFalsy: true })
