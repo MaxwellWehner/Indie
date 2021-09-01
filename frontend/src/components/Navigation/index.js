@@ -36,8 +36,8 @@ function Navigation({ isLoaded }) {
 
 	return (
 		<div className="nav_bar">
-			<NavLink exact to="/">
-				Icon
+			<NavLink exact to="/" className="icon_link">
+				<img src="/icons8-joystick-60.png" alt="Icon" />
 			</NavLink>
 			<NavLink exact to="/">
 				Store

@@ -5,6 +5,7 @@ import { addOneGame, editGameThunk } from "../../store/games";
 import { addImagesFromArr } from "../../store/images";
 import { getPublisherIdThunk } from "../../store/session";
 import "./CreateGameForm.css";
+import HorizontalScroll from "react-scroll-horizontal";
 
 function EditGameForm() {
 	const { id } = useParams();
@@ -167,7 +168,12 @@ function EditGameForm() {
 					</button>
 				</div>
 				<label>Image Preview(click to remove):</label>
-				<div className="img-preview_form">
+				{/* <div className="img-preview_form"> */}
+				<HorizontalScroll
+					reverseScroll
+					className="img-preview_form"
+					style={{ width: "60%", height: "20%" }}
+				>
 					{totalImages.map((imgUrl, i) => (
 						<img
 							key={i}
@@ -176,8 +182,14 @@ function EditGameForm() {
 							onClick={() => removeImage(imgUrl)}
 						/>
 					))}
-				</div>
-				<button type="submit" className="form_button">
+					<div className="dummy_div">.</div>
+				</HorizontalScroll>
+				{/* </div> */}
+				<button
+					type="submit"
+					className="form_button"
+					id="edit_submit_btn"
+				>
 					Edit
 				</button>
 			</form>

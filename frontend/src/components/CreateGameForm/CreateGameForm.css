@@ -1,5 +1,5 @@
 #root .game_form{
-    height: 900px;
+    height: 820px;
 }
 
 .game_form textarea{
@@ -24,21 +24,31 @@
 }
 
 .img-preview_form {
-    height: 300px;
-    width: 60%;
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
+    /* width: 20%; */
     margin-left: 20%;
+    padding: 5px
 }
 
 .img-preview_form img{
-    width: 80px;
-    height: 50%;
-    margin-bottom: 2%;
+    width: 200px;
+    max-height: 95%;
+    margin-right: 5px;
+    box-sizing: border-box;
+}
+
+.dummy_div{
+    width: 200px;
+    max-height: 95%;
+    margin-right: 5px;
+    box-sizing: border-box;
+    color: #171a21
 }
 
 .img-preview_form img:hover{
     box-shadow: 0px 0px 5px red;
    cursor: pointer;
+}
+
+#edit_submit_btn{
+    margin-top: 5%;
 }

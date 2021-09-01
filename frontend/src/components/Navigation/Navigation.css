@@ -61,3 +61,13 @@ a {
 .log_out_button:hover{
     font-weight: 600;
 }
+
+.icon_link{
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.icon_link img{
+    margin: 0 0
+}
