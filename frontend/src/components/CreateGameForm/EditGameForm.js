@@ -168,7 +168,6 @@ function EditGameForm() {
 					</button>
 				</div>
 				<label>Image Preview(click to remove):</label>
-				{/* <div className="img-preview_form"> */}
 				<HorizontalScroll
 					reverseScroll
 					className="img-preview_form"
@@ -184,7 +183,6 @@ function EditGameForm() {
 					))}
 					<div className="dummy_div">.</div>
 				</HorizontalScroll>
-				{/* </div> */}
 				<button
 					type="submit"
 					className="form_button"

@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Redirect, useHistory } from "react-router-dom";
 import { createGameThunk } from "../../store/games";
 import "./CreateGameForm.css";
+import HorizontalScroll from "react-scroll-horizontal";
 
 function GameForm() {
 	const dispatch = useDispatch();
@@ -121,16 +122,21 @@ function GameForm() {
 					</button>
 				</div>
 				<label>Image Preview:</label>
-				<div className="img-preview_form">
+				<HorizontalScroll
+					reverseScroll
+					className="img-preview_form"
+					style={{ width: "60%", height: "20%" }}
+				>
 					{totalImages.map((imgUrl, i) => (
 						<img
 							key={i}
 							alt="user input img"
-							onClick={() => removeImage(imgUrl)}
 							src={imgUrl}
+							onClick={() => removeImage(imgUrl)}
 						/>
 					))}
-				</div>
+					<div className="dummy_div">.</div>
+				</HorizontalScroll>
 				<button type="submit" className="form_button">
 					Create
 				</button>
