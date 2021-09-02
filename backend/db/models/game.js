@@ -18,6 +18,8 @@ module.exports = (sequelize, DataTypes) => {
 				through: "shopperGameLibrary",
 				otherKey: "shopperId",
 				foreignKey: "gameId",
+				onDelete: "cascade",
+				hooks: true,
 			};
 			Game.belongsToMany(models.Shopper, columnMapping);
         }
