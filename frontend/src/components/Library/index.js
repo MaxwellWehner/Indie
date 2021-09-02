@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useHistory } from "react-router-dom";
+import { Redirect, useHistory } from "react-router-dom";
 import { getGamesByIdArr } from "../../store/games";
 import { addImagesFromArr } from "../../store/images";
 import { getAllLibraryGames } from "../../store/shopperlibrary";
@@ -17,6 +17,14 @@ const ShopperLibrary = () => {
 
 	useEffect(() => {
 		if (user) {
+			if (user.userType !== "Shopper") {
+				history.push("/");
+			}
+		}
+	}, [user, history]);
+
+	useEffect(() => {
+		if (user && user.userType === "Shopper") {
 			dispatch(getAllLibraryGames(user.id));
 		}
 	}, [user, dispatch]);
@@ -42,6 +50,10 @@ const ShopperLibrary = () => {
 			dispatch(addImagesFromArr(totalImg));
 		}
 	}, [dispatch, totalImg]);
+
+	if (!user) {
+		return <Redirect to="/" />;
+	}
 
 	return (
 		<div className="gameLibraryContainer">
