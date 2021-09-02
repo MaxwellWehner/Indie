@@ -66,11 +66,11 @@
     border-radius: 3px;
     border: 0;
     padding: 7px;
-    opacity: 80%;
+    opacity: .8;
 }
 
 .purchase_button:hover{
-    opacity: 100%;
+    opacity: 1;
     cursor: pointer;
 }
 
@@ -120,11 +120,11 @@
     color: #D2E885;
     border-radius: 3px;
     border: 2px solid black;
-    opacity: 80%;
+    opacity: .8;
     padding: 10px;
     cursor: pointer;
 }
 
 #game_in_library:hover{
-    opacity: 100%;
+    opacity: 1;
 }
