@@ -13,7 +13,8 @@ const GamePage = () => {
 	const { id } = useParams();
 	const user = useSelector((state) => state.session.user);
 	const game = useSelector((state) => state.games[id]);
-	const images = useSelector((state) => state.images);
+    const images = useSelector((state) => state.images);
+	const shopperLibrary = useSelector((state) => state.shopperLibrary);
 	const [currentImgId, setCurrentImgId] = useState("");
 	const dispatch = useDispatch();
 
@@ -45,7 +46,7 @@ const GamePage = () => {
 		if (user) {
 			dispatch(getAllLibraryGames(user.id));
 		}
-	}, [user]);
+	}, [user, dispatch]);
 
 	const handleMainImg = (imageId) => {
 		setCurrentImgId(imageId);
@@ -100,10 +101,23 @@ const GamePage = () => {
 									<div>{game.Publisher}</div>
 								</div>
 							</div>
-							<button onClick={addGameToLib}>
-								Add game to library
+						</div>
+					</div>
+					<div className="purchase_container">
+						<div>Buy {game.title}</div>
+						{/* {shopperLibrary[game.id] ? ( */}
+						<div className="purchase_buttons_container">
+							<div>{game.price}</div>
+							<button
+								onClick={addGameToLib}
+								className="purchase_button"
+							>
+								Add to Library
 							</button>
 						</div>
+						{/* ) : (
+							<div>Game In Library</div>
+						)} */}
 					</div>
 				</div>
 			)}
