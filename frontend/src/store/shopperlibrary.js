@@ -34,6 +34,19 @@ export const addGameToLibrary = (gameId) => async (dispatch) => {
 	return response;
 };
 
+export const setHideOnGame = (gameId) => async (dispatch) => {
+	const response = await csrfFetch("/api/library", {
+		method: "PUT",
+		body: JSON.stringify({
+			gameId,
+		}),
+	});
+
+	const data = await response.json();
+	dispatch(addToLibrary(data.gameId, data.hidden));
+	return response;
+};
+
 const initialState = {};
 
 function reducer(state = initialState, action) {

@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Redirect, useHistory } from "react-router-dom";
 import { getGamesByIdArr } from "../../store/games";
 import { addImagesFromArr } from "../../store/images";
-import { getAllLibraryGames } from "../../store/shopperlibrary";
+import { getAllLibraryGames, setHideOnGame } from "../../store/shopperlibrary";
 import "./Library.css";
 
 const ShopperLibrary = () => {
@@ -51,6 +51,10 @@ const ShopperLibrary = () => {
 		}
 	}, [dispatch, totalImg]);
 
+	const handleHide = (gameId) => {
+		dispatch(setHideOnGame(gameId));
+	};
+
 	if (!user) {
 		return <Redirect to="/" />;
 	}
@@ -59,35 +63,47 @@ const ShopperLibrary = () => {
 		<div className="gameLibraryContainer">
 			<div className="main_title_library">Your Games</div>
 			{Object.keys(shopperLib).map((gameId) => (
-				<div key={gameId} className="game_library_card">
-					<img
-						className="game_library_card_main_img"
-						alt="game library card main img"
-						src={images[games[gameId]?.Images[0]]?.imageUrl}
-					/>
-					<div className="game_info_library_card">
-						<div className="game_library_card_title">
-							{games[gameId]?.title}
+				<div key={gameId}>
+					{shopperLib[gameId] === false && (
+						<div className="game_library_card">
+							<img
+								className="game_library_card_main_img"
+								alt="game library card main img"
+								src={images[games[gameId]?.Images[0]]?.imageUrl}
+							/>
+							<div className="game_info_library_card">
+								<div className="game_library_card_title">
+									{games[gameId]?.title}
+								</div>
+								<div>
+									{games[gameId]?.description.slice(0, 100)
+										.length <
+									games[gameId]?.description.length
+										? `${games[gameId]?.description.slice(
+												0,
+												100
+										  )}...`
+										: games[gameId]?.description}
+								</div>
+								<div className="library_buttons_container">
+									<button
+										className="form_button"
+										onClick={() =>
+											history.push(`/games/${gameId}`)
+										}
+									>
+										Store Page
+									</button>
+									<button
+										className="form_button"
+										onClick={() => handleHide(gameId)}
+									>
+										Hide Game
+									</button>
+								</div>
+							</div>
 						</div>
-						<div>
-							{games[gameId]?.description.slice(0, 100).length <
-							games[gameId]?.description.length
-								? `${games[gameId]?.description.slice(
-										0,
-										100
-								  )}...`
-								: games[gameId]?.description}
-						</div>
-						<div className="library_buttons_container">
-							<button
-								className="form_button"
-								onClick={() => history.push(`/games/${gameId}`)}
-							>
-								Store Page
-							</button>
-							<button className="form_button">Hide Game</button>
-						</div>
-					</div>
+					)}
 				</div>
 			))}
 		</div>
