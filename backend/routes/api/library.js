@@ -74,13 +74,21 @@ router.get(
 				},
 				include: [
 					{
-						model: shopperGameLibrary,
-						attributes: ["gameId", "hidden"],
+						model: Game,
 					},
 				],
 			});
 
-			return res.json({ shopper });
+			const ans = [];
+
+			shopper.Games.forEach((game) => {
+				let obj = {};
+				obj[game.shopperGameLibrary.gameId] =
+					game.shopperGameLibrary.hidden;
+				ans.push(obj);
+			});
+
+			return res.json({ ans });
 		}
 		return res.json({ error: "you must be a shopper to have a library" });
 	})

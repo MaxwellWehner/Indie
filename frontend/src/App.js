@@ -10,6 +10,7 @@ import GamePage from "./components/GamePage";
 import PublisherPage from "./components/PublisherPage";
 import GameForm from "./components/CreateGameForm";
 import EditGameForm from "./components/CreateGameForm/EditGameForm";
+import ShopperLibrary from "./components/Library";
 
 function App() {
 	const dispatch = useDispatch();
@@ -41,6 +42,9 @@ function App() {
 					</Route>
 					<Route path="/create-game">
 						<GameForm />
+					</Route>
+					<Route path="/library">
+						<ShopperLibrary />
 					</Route>
 					<Route path="/edit-game/:id">
 						<EditGameForm />

@@ -3,11 +3,15 @@ import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { addOneGame } from "../../store/games";
 import { addImagesFromArr } from "../../store/images";
-import { addGameToLibrary } from "../../store/shopperlibrary";
+import {
+	addGameToLibrary,
+	getAllLibraryGames,
+} from "../../store/shopperlibrary";
 import "./GamePage.css";
 
 const GamePage = () => {
 	const { id } = useParams();
+	const user = useSelector((state) => state.session.user);
 	const game = useSelector((state) => state.games[id]);
 	const images = useSelector((state) => state.images);
 	const [currentImgId, setCurrentImgId] = useState("");
@@ -36,6 +40,12 @@ const GamePage = () => {
 	useEffect(() => {
 		setCurrentImgId(game?.Images[0]);
 	}, [images, game]);
+
+	useEffect(() => {
+		if (user) {
+			dispatch(getAllLibraryGames(user.id));
+		}
+	}, [user]);
 
 	const handleMainImg = (imageId) => {
 		setCurrentImgId(imageId);
