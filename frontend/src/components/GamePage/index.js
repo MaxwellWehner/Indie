@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 import { addOneGame } from "../../store/games";
 import { addImagesFromArr } from "../../store/images";
 import {
@@ -13,10 +13,11 @@ const GamePage = () => {
 	const { id } = useParams();
 	const user = useSelector((state) => state.session.user);
 	const game = useSelector((state) => state.games[id]);
-    const images = useSelector((state) => state.images);
+	const images = useSelector((state) => state.images);
 	const shopperLibrary = useSelector((state) => state.shopperLibrary);
 	const [currentImgId, setCurrentImgId] = useState("");
 	const dispatch = useDispatch();
+	const history = useHistory();
 
 	useEffect(() => {
 		if (!game) {
@@ -104,20 +105,26 @@ const GamePage = () => {
 						</div>
 					</div>
 					<div className="purchase_container">
-						<div>Buy {game.title}</div>
-						{/* {shopperLibrary[game.id] ? ( */}
-						<div className="purchase_buttons_container">
-							<div>{game.price}</div>
-							<button
-								onClick={addGameToLib}
-								className="purchase_button"
+						<div className="buy_title">Buy {game.title}</div>
+						{game && shopperLibrary[game.id] === undefined ? (
+							<div className="purchase_buttons_container">
+								<div className="button_price">{game.price}</div>
+								<button
+									onClick={addGameToLib}
+									className="purchase_button"
+								>
+									Add to Library
+								</button>
+							</div>
+						) : (
+							<div
+								className="purchase_buttons_container"
+								id="game_in_library"
+								onClick={() => history.push(`/library`)}
 							>
-								Add to Library
-							</button>
-						</div>
-						{/* ) : (
-							<div>Game In Library</div>
-						)} */}
+								Game In Library
+							</div>
+						)}
 					</div>
 				</div>
 			)}

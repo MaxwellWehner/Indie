@@ -58,3 +58,73 @@
 .small_info_contaner >div > div{
     margin-bottom: 10px;
 }
+
+.purchase_button{
+    background: linear-gradient(to bottom, #799905 5%, #536904 95%);
+    color: #D2E885;
+    font-size: 16px;
+    border-radius: 3px;
+    border: 0;
+    padding: 7px;
+    opacity: 80%;
+}
+
+.purchase_button:hover{
+    opacity: 100%;
+    cursor: pointer;
+}
+
+.purchase_container{
+    margin-left: 15%;
+    margin-top: 3%;
+    width: 49%;
+    background: linear-gradient(-60deg, rgba(226,244,255,0.3) 5%, rgba(84,107,115,0.3) 95%);
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+.purchase_container > *{
+    margin: 0 0;
+}
+
+.purchase_buttons_container{
+    display: flex;
+    justify-content: flex-end;
+    padding: 3px;
+    background-color: black;
+    align-items: center;
+    width: fit-content;
+    align-self: center;
+    margin-right: 2%;
+}
+
+.purchase_buttons_container *{
+    margin: 0 0;
+}
+
+.buy_title{
+    align-self: flex-start;
+    margin-right: auto;
+    font-size: 25px;
+    margin-top: 1%;
+    margin-left: 1%;
+}
+
+.button_price{
+    padding: 7px;
+}
+
+#game_in_library{
+    background: linear-gradient(to bottom, #799905 5%, #536904 95%);
+    color: #D2E885;
+    border-radius: 3px;
+    border: 2px solid black;
+    opacity: 80%;
+    padding: 10px;
+    cursor: pointer;
+}
+
+#game_in_library:hover{
+    opacity: 100%;
+}
