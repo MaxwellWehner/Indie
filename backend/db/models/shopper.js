@@ -8,7 +8,13 @@ module.exports = (sequelize, DataTypes) => {
 		 * The `models/index` file will call this method automatically.
 		 */
 		static associate(models) {
-			Shopper.belongsTo(models.User, { foreignKey: "userId" });
+            Shopper.belongsTo(models.User, { foreignKey: "userId" });
+			const columnMapping = {
+				through: "shopperGameLibrary",
+				otherKey: "gameId",
+				foreignKey: "shopperId",
+			};
+			Shopper.belongsToMany(models.Game, columnMapping);
 		}
 	}
 	Shopper.init(

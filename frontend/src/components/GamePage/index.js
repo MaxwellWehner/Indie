@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { addOneGame } from "../../store/games";
 import { addImagesFromArr } from "../../store/images";
+import { addGameToLibrary } from "../../store/shopperlibrary";
 import "./GamePage.css";
 
 const GamePage = () => {
@@ -38,6 +39,10 @@ const GamePage = () => {
 
 	const handleMainImg = (imageId) => {
 		setCurrentImgId(imageId);
+	};
+
+	const addGameToLib = async () => {
+		await dispatch(addGameToLibrary(id));
 	};
 
 	return (
@@ -85,6 +90,9 @@ const GamePage = () => {
 									<div>{game.Publisher}</div>
 								</div>
 							</div>
+							<button onClick={addGameToLib}>
+								Add game to library
+							</button>
 						</div>
 					</div>
 				</div>

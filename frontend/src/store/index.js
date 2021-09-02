@@ -3,11 +3,13 @@ import thunk from 'redux-thunk';
 import session from './session'
 import games from "./games";
 import images from "./images";
+import shopperLibrary from "./shopperlibrary";
 
 const rootReducer = combineReducers({
 	session,
 	games,
 	images,
+	shopperLibrary,
 });
 
 let enhancer;
