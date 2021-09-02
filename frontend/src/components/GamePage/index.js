@@ -60,7 +60,7 @@ const GamePage = () => {
 	return (
 		<>
 			{game && (
-				<div className="gamepage">
+				<div className="gamepage main_content">
 					<div className="gamePage_Title">{game.title}</div>
 					<div className="gamePage_cameCard">
 						<div className="img_container_mainPage">

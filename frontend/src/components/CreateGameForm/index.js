@@ -67,7 +67,10 @@ function GameForm() {
 
 	return (
 		<>
-			<form onSubmit={handleSubmit} className="signUp_form game_form">
+			<form
+				onSubmit={handleSubmit}
+				className="signUp_form game_form main_content"
+			>
 				<h1>Create A Game</h1>
 				<ul>
 					{errors.map((error, idx) => (

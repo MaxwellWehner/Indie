@@ -58,7 +58,7 @@ const PublisherPage = () => {
 	}
 
 	return (
-		<div className="pub_card_container">
+		<div className="pub_card_container main_content">
 			{gameIds &&
 				gameIds.map((gameId) => (
 					<div key={gameId} className="pub_game_card">

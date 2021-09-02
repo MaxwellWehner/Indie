@@ -53,7 +53,7 @@ function Home() {
 	};
 
 	return (
-		<div className="home_container">
+		<div className="home_container main_content">
 			{Object.keys(games).length >= 5 &&
 				Object.keys(images).length > 5 && (
 					<GameCarousel gameIds={[1, 2, 4]} />

@@ -10,3 +10,12 @@ body{
     background-color: #1b2838;
     color: white;
 }
+
+#root{
+    position: relative;
+    min-height: 100vh;
+}
+
+.main_content{
+    padding-bottom: 70px;
+}

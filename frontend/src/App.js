@@ -11,6 +11,7 @@ import PublisherPage from "./components/PublisherPage";
 import GameForm from "./components/CreateGameForm";
 import EditGameForm from "./components/CreateGameForm/EditGameForm";
 import ShopperLibrary from "./components/Library";
+import Footer from "./components/Footer";
 
 function App() {
 	const dispatch = useDispatch();
@@ -54,6 +55,7 @@ function App() {
 					</Route>
 				</Switch>
 			)}
+			<Footer />
 		</>
 	);
 }

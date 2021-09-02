@@ -60,7 +60,7 @@ const ShopperLibrary = () => {
 	}
 
 	return (
-		<div className="gameLibraryContainer">
+		<div className="gameLibraryContainer main_content">
 			<div className="main_title_library">Your Games</div>
 			{Object.keys(shopperLib).map((gameId) => (
 				<React.Fragment key={gameId}>
