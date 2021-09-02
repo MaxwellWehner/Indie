@@ -45,3 +45,26 @@
 .library_buttons_container button{
     margin-right: 10px;
 }
+
+.hiddenGame{
+    background-color: #171a21;
+    width: 100%;
+    margin: 0 0;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 2px;
+    padding-bottom: 2px;
+    margin-bottom: 2%;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.hiddenGame * {
+    margin: 0 0;
+}
+
+.fa-plus-circle{
+    margin-left: auto;
+    margin-right: 10px;
+}

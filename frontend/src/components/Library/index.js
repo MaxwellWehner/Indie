@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Redirect, useHistory } from "react-router-dom";
 import { getGamesByIdArr } from "../../store/games";
@@ -63,8 +63,8 @@ const ShopperLibrary = () => {
 		<div className="gameLibraryContainer">
 			<div className="main_title_library">Your Games</div>
 			{Object.keys(shopperLib).map((gameId) => (
-				<div key={gameId}>
-					{shopperLib[gameId] === false && (
+				<React.Fragment key={gameId}>
+					{shopperLib[gameId] === false ? (
 						<div className="game_library_card">
 							<img
 								className="game_library_card_main_img"
@@ -103,8 +103,18 @@ const ShopperLibrary = () => {
 								</div>
 							</div>
 						</div>
+					) : (
+						<div className="hiddenGame">
+							<div className="hiddenName">
+								{games[gameId]?.title}
+							</div>
+							<i
+								className="fas fa-plus-circle"
+								onClick={() => handleHide(gameId)}
+							></i>
+						</div>
 					)}
-				</div>
+				</React.Fragment>
 			))}
 		</div>
 	);
