@@ -7,12 +7,19 @@ const GameCarousel = ({ gameIds }) => {
 	const games = useSelector((state) => state.games);
 	const images = useSelector((state) => state.images);
 	const [currentGame, setCurrentGame] = useState(games[gameIds[0]]);
-	const [currentGameIdx, setCurrentGameIdx] = useState(0);
+    const [currentGameIdx, setCurrentGameIdx] = useState(0);
+	const [mainImg, setMainImg] = useState("");
 	const history = useHistory();
 
 	useEffect(() => {
 		setCurrentGame(games[gameIds[currentGameIdx]]);
 	}, [currentGameIdx, games, gameIds]);
+
+	useEffect(() => {
+		if (currentGame) {
+			setMainImg(images[currentGame.Images[0]]?.imageUrl);
+		}
+	}, [currentGame, images]);
 
 	const handleRight = () => {
 		if (currentGameIdx === gameIds.length - 1) {
@@ -41,7 +48,7 @@ const GameCarousel = ({ gameIds }) => {
 			</div>
 			<div className="carousel_container" onClick={goToGame}>
 				<img
-					src={images[currentGame.Images[0]]?.imageUrl}
+					src={mainImg}
 					className="carousel_main_img"
 					alt="main game img"
 				/>
@@ -52,18 +59,58 @@ const GameCarousel = ({ gameIds }) => {
 					<div className="img_container">
 						<img
 							src={images[currentGame.Images[1]]?.imageUrl}
+							onMouseOver={() =>
+								setMainImg(
+									images[currentGame.Images[1]]?.imageUrl
+								)
+							}
+							onMouseLeave={() =>
+								setMainImg(
+									images[currentGame.Images[0]]?.imageUrl
+								)
+							}
 							alt="game img 1"
 						/>
 						<img
 							src={images[currentGame.Images[2]]?.imageUrl}
+							onMouseOver={() =>
+								setMainImg(
+									images[currentGame.Images[2]]?.imageUrl
+								)
+							}
+							onMouseLeave={() =>
+								setMainImg(
+									images[currentGame.Images[0]]?.imageUrl
+								)
+							}
 							alt="game img 2"
 						/>
 						<img
 							src={images[currentGame.Images[3]]?.imageUrl}
+							onMouseOver={() =>
+								setMainImg(
+									images[currentGame.Images[3]]?.imageUrl
+								)
+							}
+							onMouseLeave={() =>
+								setMainImg(
+									images[currentGame.Images[0]]?.imageUrl
+								)
+							}
 							alt="game img 3"
 						/>
 						<img
 							src={images[currentGame.Images[4]]?.imageUrl}
+							onMouseOver={() =>
+								setMainImg(
+									images[currentGame.Images[4]]?.imageUrl
+								)
+							}
+							onMouseLeave={() =>
+								setMainImg(
+									images[currentGame.Images[0]]?.imageUrl
+								)
+							}
 							alt="game img 4"
 						/>
 					</div>
