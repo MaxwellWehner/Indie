@@ -108,5 +108,44 @@ router.put(
 	})
 );
 
+router.delete(
+	"/:id(\\d+)",
+	requireAuth,
+	asyncHandler(async (req, res) => {
+		const userId = req.user.id;
+		const gameId = req.params.id;
+
+		if (req.user.userType === "Shopper") {
+			const shopper = await Shopper.findOne({
+				where: {
+					userId,
+				},
+			});
+
+			const libraryEnrty = await shopperGameLibrary.findOne({
+				where: {
+					shopperId: shopper.id,
+					gameId,
+				},
+			});
+
+			if (Object.keys(libraryEnrty).length) {
+				await libraryEnrty.destroy();
+				return res.json({ message: "success" }); //game removed succsess
+			} else {
+				return res.json({
+					errors: ["Tis game must be in your library to remove it"],
+				});
+			}
+		} else {
+			return res.json({
+				errors: [
+					"You must be shopper to remove a game from your library",
+				],
+			});
+		}
+	})
+);
+
 
 module.exports = router;
