@@ -40,6 +40,7 @@
 
 .library_buttons_container{
     margin-top: 2.5%;
+    display: flex;
 }
 
 .library_buttons_container button{
@@ -68,4 +69,13 @@
     margin-left: auto;
     margin-right: 10px;
     cursor: pointer;
+}
+
+
+#library_remove_button{
+    margin-left: auto;
+}
+
+#library_remove_button:hover{
+    background-color: #ca3838;
 }

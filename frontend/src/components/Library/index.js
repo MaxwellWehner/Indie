@@ -3,7 +3,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { Redirect, useHistory } from "react-router-dom";
 import { getGamesByIdArr } from "../../store/games";
 import { addImagesFromArr } from "../../store/images";
-import { getAllLibraryGames, setHideOnGame } from "../../store/shopperlibrary";
+import {
+	getAllLibraryGames,
+	removeGameFromLibrary,
+	setHideOnGame,
+} from "../../store/shopperlibrary";
 import "./Library.css";
 
 const ShopperLibrary = () => {
@@ -55,6 +59,10 @@ const ShopperLibrary = () => {
 		dispatch(setHideOnGame(gameId));
 	};
 
+	const handleRemove = (gameId) => {
+		dispatch(removeGameFromLibrary(gameId));
+	};
+
 	if (!user) {
 		return <Redirect to="/" />;
 	}
@@ -99,6 +107,13 @@ const ShopperLibrary = () => {
 										onClick={() => handleHide(gameId)}
 									>
 										Hide Game
+									</button>
+									<button
+										className="form_button"
+										id="library_remove_button"
+										onClick={() => handleRemove(gameId)}
+									>
+										Return
 									</button>
 								</div>
 							</div>

@@ -2,6 +2,7 @@ import { csrfFetch } from "./csrf.js";
 
 const ADD_TO_LIBRARY = "library/ADD_TO_LIBRARY";
 const GET_ALL_GAMES = "library/GET_ALL_GAMES";
+const REMOVE_GAME = "library/REMOVE_GAME";
 
 const addToLibrary = (gameId, hidden) => ({
 	type: ADD_TO_LIBRARY,
@@ -12,6 +13,11 @@ const addToLibrary = (gameId, hidden) => ({
 const getGamesFromLib = (gameInfo) => ({
 	type: GET_ALL_GAMES,
 	gameInfo,
+});
+
+const removeGame = (gameId) => ({
+	type: REMOVE_GAME,
+	gameId,
 });
 
 export const getAllLibraryGames = (userId) => async (dispatch) => {
@@ -47,6 +53,16 @@ export const setHideOnGame = (gameId) => async (dispatch) => {
 	return response;
 };
 
+export const removeGameFromLibrary = (gameId) => async (dispatch) => {
+	const response = await csrfFetch(`/api/library/${gameId}`, {
+		method: "DELETE",
+	});
+
+	const data = await response.json();
+	dispatch(removeGame(gameId));
+	return data;
+};
+
 const initialState = {};
 
 function reducer(state = initialState, action) {
@@ -62,6 +78,10 @@ function reducer(state = initialState, action) {
 					game[Object.keys(game)[0]];
 			});
 			return newGetLibState;
+		case REMOVE_GAME:
+			const newDeleteState = { ...state };
+			delete newDeleteState[action.gameId];
+			return newDeleteState;
 		default:
 			return state;
 	}
