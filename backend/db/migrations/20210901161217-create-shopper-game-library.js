@@ -12,11 +12,13 @@ module.exports = {
 				allowNull: false,
 				type: Sequelize.INTEGER,
 				references: { model: "Games" },
+				onDelete: "cascade",
 			},
 			shopperId: {
 				allowNull: false,
 				type: Sequelize.INTEGER,
 				references: { model: "Shoppers" },
+				onDelete: "cascade",
 			},
 			hidden: {
 				allowNull: false,
