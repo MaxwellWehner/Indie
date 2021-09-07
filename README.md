@@ -136,6 +136,13 @@ npm start
 ## Technical Implementation Details
 
 
+### Adding Multiple User Types
+
+During this project, I found it difficult at first having one users table with publishers and shoppers intertwined. Because publishers and shoppers required different amounts and types of info, it was only natural to split them up. However that lead to some other problems with having to possibly query multiple tables when needing to know if a user was a publisher or shopper. That's where the users.UserType comes in. This allowed for quick look up to determine what type a user was and then I was able to do a separate query on the correct table to save time. 
+
+![https://i.imgur.com/5n6Thkv.jpg](https://i.imgur.com/5n6Thkv.jpg)
+
+
 ## Future Features
 
 1.  **Search** - search through games that you want to be able to add to your library
