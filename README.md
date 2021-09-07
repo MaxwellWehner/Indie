@@ -143,6 +143,41 @@ During this project, I found it difficult at first having one users table with p
 ![https://i.imgur.com/5n6Thkv.jpg](https://i.imgur.com/5n6Thkv.jpg)
 
 
+
+### Shaping Library State To Be Faster
+
+One problem I had was with nested objects in state, especially for the library feature. To over come this I wrote the back end to deliver only the gameId and if the game was hidden. This allowed me to format my own object state where gameId was the key and hidden was the value. This drastically reduced the about of nested objects for such little information and still allows for near instant look up time with a normalized state. 
+```js
+const  shopper = await Shopper.findOne({
+	attributes: [],
+	where: {
+		userId,
+	},
+	include: [
+		{
+			model:  Game,
+		},
+	],
+});
+
+const  ans = [];
+shopper.Games.forEach((game) => {
+	let  obj = {};
+	obj[game.shopperGameLibrary.gameId] =
+	game.shopperGameLibrary.hidden;
+	ans.push(obj);
+});
+```
+resulting in a state shape like
+```js
+ shopperLibrary: {
+    '1': false,
+    '2': true,
+    '4': false
+  }
+```
+
+
 ## Future Features
 
 1.  **Search** - search through games that you want to be able to add to your library
