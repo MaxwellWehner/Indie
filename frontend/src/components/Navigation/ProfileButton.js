@@ -1,17 +1,19 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch } from 'react-redux';
-import * as sessionActions from '../../store/session';
+import { useHistory } from "react-router-dom";
+import * as sessionActions from "../../store/session";
 
 function ProfileButton({ user }) {
-  const dispatch = useDispatch();
-  const [showMenu, setShowMenu] = useState(false);
+	const dispatch = useDispatch();
+	const [showMenu, setShowMenu] = useState(false);
+	const history = useHistory();
 
-  const openMenu = () => {
+	const openMenu = () => {
 		if (showMenu) return;
 		setShowMenu(true);
-  };
+	};
 
-  useEffect(() => {
+	useEffect(() => {
 		if (!showMenu) return;
 
 		const closeMenu = () => {
@@ -21,25 +23,28 @@ function ProfileButton({ user }) {
 		document.addEventListener("click", closeMenu);
 
 		return () => document.removeEventListener("click", closeMenu);
-  }, [showMenu]);
+	}, [showMenu]);
 
-  const logout = (e) => {
+	const logout = async (e) => {
 		e.preventDefault();
-		dispatch(sessionActions.logout());
-  };
+		await dispatch(sessionActions.logout());
+		history.push("/");
+	};
 
-  return (
+	return (
 		<>
 			<div onClick={openMenu} className="user_info_button">
 				{user.username}
 			</div>
 			{showMenu && (
 				<div className="profile-dropdown">
-					<div onClick={logout} className="log_out_button">Log Out</div>
+					<div onClick={logout} className="log_out_button">
+						Log Out
+					</div>
 				</div>
 			)}
 		</>
-  );
+	);
 }
 
 export default ProfileButton;
